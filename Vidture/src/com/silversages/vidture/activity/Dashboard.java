@@ -1,9 +1,14 @@
-package com.example.vidture;
+package com.silversages.vidture.activity;
+
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.silversages.vidture.R;
+import com.silversages.vidture.R.id;
+import com.silversages.vidture.R.layout;
+import com.silversages.vidture.R.menu;
 
 public class Dashboard extends ActionBarActivity {
 
