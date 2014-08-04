@@ -8,15 +8,15 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
-import com.silversage.brosApp.BrosApp;
-import com.silversage.brosApp.R;
-import com.silversage.brosApp.activities.Dashboard;
+import com.silversages.vidture.R;
+import com.silversages.vidture.VidtureApp;
+import com.silversages.vidture.activity.Dashboard;
 
 public class Notification {
 
 	public static void NewMessageNotification(String message, String title) {
 		// Creates an explicit intent for an Activity in your app
-		Intent resultIntent = new Intent(BrosApp.context, Dashboard.class);
+		Intent resultIntent = new Intent(VidtureApp.context, Dashboard.class);
 
 		// The stack builder object will contain an artificial back
 		// stack for the
@@ -25,7 +25,7 @@ public class Notification {
 		// out of
 		// your application to the Home screen.
 		TaskStackBuilder stackBuilder = TaskStackBuilder
-				.create(BrosApp.context);
+				.create(VidtureApp.context);
 		// Adds the back stack for the Intent (but not the Intent
 		// itself)
 		stackBuilder.addParentStack(Dashboard.class);
@@ -36,7 +36,7 @@ public class Notification {
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-				BrosApp.context).setSmallIcon(R.drawable.ic_launcher)
+				VidtureApp.context).setSmallIcon(R.drawable.ic_launcher)
 				.setContentTitle(title).setContentIntent(resultPendingIntent)
 				.setVibrate(new long[] { 100, 250, 100, 500 })
 				.setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -44,7 +44,7 @@ public class Notification {
 
 		int notifyID = 1;
 		// mBuilder.setContentIntent(resultPendingIntent);
-		NotificationManager mNotificationManager = (NotificationManager) BrosApp.context
+		NotificationManager mNotificationManager = (NotificationManager) VidtureApp.context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		// mId allows you to update the notification later on.
