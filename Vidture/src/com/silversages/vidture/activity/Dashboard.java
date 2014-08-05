@@ -1,7 +1,9 @@
 package com.silversages.vidture.activity;
 
-
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,7 +15,19 @@ public class Dashboard extends VidtureAppActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.createaccount);
+
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		if (prefs.getBoolean("first_time", false)) {
+
+			setContentView(R.layout.dashboard);
+
+		} else {
+			
+			startActivity(new Intent(this,Login.class));
+			this.finish();
+		}
+
 	}
 
 	@Override
@@ -38,12 +52,12 @@ public class Dashboard extends VidtureAppActivity {
 	@Override
 	protected void setupView() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void setupListner() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
