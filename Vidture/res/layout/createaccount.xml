@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:hint="Enter Name"
+            android:maxLength="15" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:maxLength="20" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:maxLength="15" />
+
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dip" >
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#00ccff"
+                android:gravity="center"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#00ccff"
+                android:gravity="center"
+                android:text="Create" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
