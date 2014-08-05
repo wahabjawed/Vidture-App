@@ -1,16 +1,14 @@
 package com.silversages.vidture.activity;
 
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.silversages.vidture.R;
-import com.silversages.vidture.R.id;
-import com.silversages.vidture.R.layout;
-import com.silversages.vidture.R.menu;
 
-public class Dashboard extends ActionBarActivity {
+import com.silversages.vidture.R;
+import com.silversages.vidture.abstracts.VidtureAppActivity;
+
+public class Dashboard extends VidtureAppActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +33,17 @@ public class Dashboard extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void setupView() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setupListner() {
+		// TODO Auto-generated method stub
+		
 	}
 }

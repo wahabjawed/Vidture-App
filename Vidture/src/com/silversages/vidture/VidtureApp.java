@@ -22,7 +22,7 @@ public class VidtureApp extends Application {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 
-		db = openOrCreateDatabase("brosApp", MODE_PRIVATE, null);
+		db = openOrCreateDatabase("VidtureApp", MODE_PRIVATE, null);
 		context = getApplicationContext();
 		super.onCreate();
 
