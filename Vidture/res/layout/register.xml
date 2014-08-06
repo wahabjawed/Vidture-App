@@ -17,9 +17,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@drawable/border"
-            android:gravity="center"
             android:hint="Enter Name"
-            android:maxLength="15" />
+            android:maxLength="15"
+            android:textColorHint="#c6d9f1" />
 
         <EditText
             android:id="@+id/email"
@@ -29,10 +29,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/border"
-            android:gravity="center"
             android:hint="Enter Email"
             android:inputType="textEmailAddress"
-            android:maxLength="20" />
+            android:maxLength="20"
+            android:textColorHint="#c6d9f1" />
 
         <EditText
             android:id="@+id/password"
@@ -42,10 +42,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:background="@drawable/border"
-            android:gravity="center"
             android:hint="Enter Password"
             android:inputType="textPassword"
-            android:maxLength="15" />
+            android:maxLength="15"
+            android:textColorHint="#c6d9f1" />
 
         <LinearLayout
             android:id="@+id/buttons"
@@ -60,18 +60,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="#00ccff"
+                android:background="#4ba2dc"
                 android:gravity="center"
-                android:text="Cancel" />
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:text="Cancel"
+                android:textColor="#fff" />
 
             <Button
                 android:id="@+id/create"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="#00ccff"
+                android:background="#4ba2dc"
                 android:gravity="center"
-                android:text="Create" />
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:text="Create"
+                android:textColor="#fff" />
         </LinearLayout>
     </RelativeLayout>
 

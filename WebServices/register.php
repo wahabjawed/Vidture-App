@@ -16,7 +16,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
     $password = $_POST['password'];
 
     // include db connect class
-    require_once __DIR__ . 'include/db_connect.php';
+    require_once __DIR__ . '/include/db_connect.php';
 
     // connecting to db
     $db = new DB_CONNECT();
@@ -26,9 +26,14 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
 
     // check if row inserted or not
     if ($result) {
+		
+		$result = mysql_query("SELECT * FROM user WHERE email = '$email' && password = '$password'");
+		$result = mysql_fetch_array($result);
+		
         // successfully inserted into database
         $response["success"] = 1;
         $response["message"] = "Account successfully created.";
+		$response["ID"] = $result["user_id"];
 
         // echoing JSON response
         echo json_encode($response);

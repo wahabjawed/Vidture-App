@@ -1,10 +1,10 @@
-package com.silversages.vidture;
+package com.silversages.viditure;
 import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 
-public class VidtureApp extends Application {
+public class ViditureApp extends Application {
 	public static SQLiteDatabase db;
 	public static Context context;
 	public static String[][] WifiList;

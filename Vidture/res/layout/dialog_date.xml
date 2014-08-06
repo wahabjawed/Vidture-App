@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff" >
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dip"
+        android:text="eSignature"
+        android:textColor="#4ba2dc" />
+
+    <EditText
+        android:id="@+id/signature"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/heading"
+        android:layout_margin="30dp"
+        android:background="@drawable/border"
+        android:maxLines="3"
+        android:textColor="#dfdfdf" />
+
+    <EditText
+        android:id="@+id/dated"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signature"
+        android:layout_margin="20dp"
+        android:background="@drawable/border"
+        android:hint="Date"
+        android:maxLength="20"
+        android:textColor="#dfdfdf"
+        android:textColorHint="#c6d9f1" />
+
+    <Button
+        android:id="@+id/use_signature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dated"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dip"
+        android:background="#4ba2dc"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:text="Use this signature"
+        android:textColor="#fff" />
+
+</RelativeLayout>

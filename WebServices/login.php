@@ -21,13 +21,13 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 	$email = $_POST['email'];
 
     // get a users from users table
-    $result = mysql_query("SELECT *FROM user WHERE email = $email and password = $password");
+    $result = mysql_query("SELECT * FROM user WHERE email = '$email' && password = '$password'");
 
     if (!empty($result)) {
         // check for empty result
         if (mysql_num_rows($result) > 0) {
 
-            $result = mysql_fetch_array($result);
+           $result = mysql_fetch_array($result);
 
            
             // success
@@ -35,7 +35,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 
             // user node
             $response["name"] = $result["name"];
-
+			$response["ID"] = $result["user_id"];
             
 
             // echoing JSON response

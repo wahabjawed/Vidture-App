@@ -1,4 +1,4 @@
-package com.silversages.vidture.util;
+package com.silversages.viditure.util;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,15 +8,15 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
-import com.silversages.vidture.R;
-import com.silversages.vidture.VidtureApp;
-import com.silversages.vidture.activity.Dashboard;
+import com.silversages.viditure.R;
+import com.silversages.viditure.ViditureApp;
+import com.silversages.viditure.activity.Dashboard;
 
 public class Notification {
 
 	public static void NewMessageNotification(String message, String title) {
 		// Creates an explicit intent for an Activity in your app
-		Intent resultIntent = new Intent(VidtureApp.context, Dashboard.class);
+		Intent resultIntent = new Intent(ViditureApp.context, Dashboard.class);
 
 		// The stack builder object will contain an artificial back
 		// stack for the
@@ -25,7 +25,7 @@ public class Notification {
 		// out of
 		// your application to the Home screen.
 		TaskStackBuilder stackBuilder = TaskStackBuilder
-				.create(VidtureApp.context);
+				.create(ViditureApp.context);
 		// Adds the back stack for the Intent (but not the Intent
 		// itself)
 		stackBuilder.addParentStack(Dashboard.class);
@@ -36,7 +36,7 @@ public class Notification {
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-				VidtureApp.context).setSmallIcon(R.drawable.ic_launcher)
+				ViditureApp.context).setSmallIcon(R.drawable.ic_launcher)
 				.setContentTitle(title).setContentIntent(resultPendingIntent)
 				.setVibrate(new long[] { 100, 250, 100, 500 })
 				.setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
@@ -44,7 +44,7 @@ public class Notification {
 
 		int notifyID = 1;
 		// mBuilder.setContentIntent(resultPendingIntent);
-		NotificationManager mNotificationManager = (NotificationManager) VidtureApp.context
+		NotificationManager mNotificationManager = (NotificationManager) ViditureApp.context
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		// mId allows you to update the notification later on.

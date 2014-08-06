@@ -1,8 +1,8 @@
-package com.silversages.vidture.util;
+package com.silversages.viditure.util;
 
 import java.util.List;
 
-import com.silversages.vidture.VidtureApp;
+import com.silversages.viditure.ViditureApp;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,7 +23,7 @@ public class NetworkManager {
 
 	static NetworkInfo mobile;
 	static NetworkInfo mWifi;
-	static Context context = VidtureApp.getContext();
+	static Context context = ViditureApp.getContext();
 	static NetworkInfo activeNetworkInfo;
 	static WifiManager mainWifi;
 	static WifiReceiver receiverWifi;
@@ -93,7 +93,7 @@ public class NetworkManager {
 					data[i][1] = (LastWifi.get(i)).BSSID;
 
 				}
-				VidtureApp.WifiList = data;
+				ViditureApp.WifiList = data;
 				context.unregisterReceiver(receiverWifi);
 			}
 			

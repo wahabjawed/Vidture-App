@@ -1,4 +1,4 @@
-package com.silversages.vidture.util;
+package com.silversages.viditure.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,44 +39,21 @@ public class JSONParser {
 
 		// Making HTTP request
 		try {
-
-			// HttpParams httpParameters = new BasicHttpParams();
-			// Set the timeout in milliseconds until a connection is
-			// established.
-			// The default value is zero, that means the timeout is not
-			// used.
-			// int timeoutConnection = 7000;
-			// HttpConnectionParams.setConnectionTimeout(httpParameters,
-			// timeoutConnection);
-			// Set the default socket timeout (SO_TIMEOUT)
-			// in milliseconds which is the timeout for waiting for data.
-			// int timeoutSocket = 7000;
-			// HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
-
-			// DefaultHttpClient httpClient = new
-			// DefaultHttpClient(httpParameters);
-
-			// HttpHost proxy = new HttpHost("10.1.20.17", 8080);
-			// httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,
-			// proxy);
-
+			
 			// check for request method
-			if (method == "POST") {
+			if(method == "POST"){
 				// request method is POST
 				// defaultHttpClient
 				DefaultHttpClient httpClient = new DefaultHttpClient();
-
 				HttpPost httpPost = new HttpPost(url);
 				httpPost.setEntity(new UrlEncodedFormEntity(params));
 
 				HttpResponse httpResponse = httpClient.execute(httpPost);
 				HttpEntity httpEntity = httpResponse.getEntity();
 				is = httpEntity.getContent();
-
-			} else if (method == "GET") {
-
+				
+			}else if(method == "GET"){
 				// request method is GET
-
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				String paramString = URLEncodedUtils.format(params, "utf-8");
 				url += "?" + paramString;
@@ -85,7 +62,8 @@ public class JSONParser {
 				HttpResponse httpResponse = httpClient.execute(httpGet);
 				HttpEntity httpEntity = httpResponse.getEntity();
 				is = httpEntity.getContent();
-			}
+			}			
+			
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -100,14 +78,11 @@ public class JSONParser {
 					is, "iso-8859-1"), 8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
-
 			while ((line = reader.readLine()) != null) {
 				sb.append(line + "\n");
 			}
-
 			is.close();
 			json = sb.toString();
-
 		} catch (Exception e) {
 			Log.e("Buffer Error", "Error converting result " + e.toString());
 		}

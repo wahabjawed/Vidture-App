@@ -1,12 +1,13 @@
-package com.silversages.vidture.abstracts;
+package com.silversages.viditure.abstracts;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
-import com.silversages.vidture.util.SQLHelper;
+import com.silversages.viditure.Network.INetwork;
+import com.silversages.viditure.util.SQLHelper;
 
-public abstract class VidtureAppActivity extends ActionBarActivity{
+public abstract class ViditureNetworkActivity extends ActionBarActivity implements INetwork{
 
 	protected SQLHelper db;
 	
@@ -19,11 +20,13 @@ public abstract class VidtureAppActivity extends ActionBarActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		
 		super.onCreate(savedInstanceState);
+		
 		
 	}
 	
-	protected void showToast(String text,int duration){
+	public void showToast(String text,int duration){
 		
 		Toast.makeText(this, text, duration).show();
 		

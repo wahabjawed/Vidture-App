@@ -1,6 +1,6 @@
-package com.silversages.vidture.util;
+package com.silversages.viditure.util;
 
-import com.silversages.vidture.VidtureApp;
+import com.silversages.viditure.ViditureApp;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,10 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class SQLHelper {
-	static SQLiteDatabase db = VidtureApp.db;
+	static SQLiteDatabase db = ViditureApp.db;
 
 	public static void SetupDB(Context context) {
-		db.execSQL("CREATE TABLE IF NOT EXISTS ContactList(number TEXT,name TEXT, displayPic BLOB);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS user(id INTEGER, name TEXT,email TEXT, password TEXT);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID INTEGER PRIMARY KEY, number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID INTEGER PRIMARY KEY, message TEXT, refID INTEGER);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_Message(ID INTEGER, ContactID INTEGER, MessageID INTEGER, Nofity INTEGER, Time TEXT, Day TEXT, Reminder TEXT);");
@@ -20,12 +20,12 @@ public class SQLHelper {
 	}
 
 	public static boolean isFirstTime() {
-		Log.d("BrosApp--SQLHelper", "isFirstTime--Checking!");
+		Log.d("VidtureApp--SQLHelper", "isFirstTime--Checking!");
 		if ((db.rawQuery("select * from Preference", null)).getCount() > 0) {
-			Log.d("BrosApp--SQLHelper", "isFirstTime--Dashboard");
+			Log.d("VidtureApp--SQLHelper", "isFirstTime--Dashboard");
 			return false;
 		} else {
-			Log.d("BrosApp--SQLHelper", "isFirstTime--Splash");
+			Log.d("VidtureApp--SQLHelper", "isFirstTime--Splash");
 			return true;
 		}
 	}
@@ -36,18 +36,18 @@ public class SQLHelper {
 		insertValues.put("isFirst", "1");
 
 		db.insert("Preference", null, insertValues);
-		Log.d("BrosApp--SQLHelper", "Preference--Data inserted");
+		Log.d("VidtureApp--SQLHelper", "Preference--Data inserted");
 	}
 
 	public static void clearData() {
 		db.delete("Preference", null, null);
-		Log.d(" BrosApp--SQLHelper", "Menu Item--Data Deleted");
+		Log.d(" VidtureApp--SQLHelper", "Menu Item--Data Deleted");
 
 	}
 
 	public static void DeleteContact(int id) {
 		db.delete("Contact", "ID=" + id, null);
-		Log.d(" BrosApp--SQLHelper", "Dashboard List--Data Deleted");
+		Log.d(" VidtureApp--SQLHelper", "Dashboard List--Data Deleted");
 
 	}
 
@@ -58,48 +58,48 @@ public class SQLHelper {
 
 	public static Cursor getDashboardContactList() {
 		// TODO Auto-generated method stub
-		Log.d(" BrosApp--SQLHelper", "Contact--Querying Data");
+		Log.d(" VidtureApp--SQLHelper", "Contact--Querying Data");
 		return db.rawQuery("select * from Contact order by name", null);
 	}
 
 	public static Cursor getDashboardContactList(int ID) {
 		// TODO Auto-generated method stub
-		Log.d(" BrosApp--SQLHelper", "Contact--Querying Data");
+		Log.d(" VidtureApp--SQLHelper", "Contact--Querying Data");
 		return db.rawQuery("select * from Contact where ID = " + ID, null);
 	}
 
 	public static Cursor getWiFiList(int ID) {
 		// TODO Auto-generated method stub
-		Log.d(" BrosApp--SQLHelper", "WiFi List--Querying Data");
+		Log.d(" VidtureApp--SQLHelper", "WiFi List--Querying Data");
 		return db.rawQuery("select * from Ref_WiFi order by ssid", null);
 	}
 
 	public static void insertContact(String name, String no, byte[] pic) {
-		Log.d("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
+		Log.d("VidtureApp--SQLHelper", "Contact--Data" + name + " " + no);
 		ContentValues insertValues = new ContentValues();
 		insertValues.put("name", name);
 		insertValues.put("number", no);
 		insertValues.put("displayPic", pic);
 		db.insert("Contact", null, insertValues);
-		Log.d("BrosApp--SQLHelper", "Contact--Data inserted");
+		Log.d("VidtureApp--SQLHelper", "Contact--Data inserted");
 
 	}
 
 	public static void updateContact(int id, String name, String no, byte[] pic) {
-		Log.d("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
+		Log.d("VidtureApp--SQLHelper", "Contact--Data" + name + " " + no);
 		ContentValues updateValues = new ContentValues();
 		updateValues.put("name", name);
 		updateValues.put("number", no);
 		updateValues.put("displayPic", pic);
 		db.update("Contact", updateValues, "ID= " + id, null);
-		Log.d("BrosApp--SQLHelper", "Contact--Data uptated");
+		Log.d("VidtureApp--SQLHelper", "Contact--Data uptated");
 	}
 
 	public static void PopulateWiFiList(String[][] data) {
 
-		Log.d("BrosApp--SQLHelper", "Ref_WiFi---Truncate");
+		Log.d("VidtureApp--SQLHelper", "Ref_WiFi---Truncate");
 		db.delete("Ref_WiFi", null, null);
-		Log.d("BrosApp--SQLHelper", "Ref_WiFi---Inserting");
+		Log.d("VidtureApp--SQLHelper", "Ref_WiFi---Inserting");
 
 		ContentValues insertValues;
 		for (int i = 0; i < data.length; i++) {
@@ -107,11 +107,11 @@ public class SQLHelper {
 			insertValues.put("ssid", data[i][0]);
 			insertValues.put("bssid", data[i][1]);
 
-			Log.d("BrosApp--SQLHelper", "Ref_WiFi--" + data[i][0]);
+			Log.d("VidtureApp--SQLHelper", "Ref_WiFi--" + data[i][0]);
 			db.insert("Ref_WiFi", null, insertValues);
 
 		}
-		Log.d("BrosApp--SQLHelper", "Ref_WiFi--Data inserted");
+		Log.d("VidtureApp--SQLHelper", "Ref_WiFi--Data inserted");
 
 	}
 
@@ -123,9 +123,9 @@ public class SQLHelper {
 				{ "4", "Hey babe, what are you up to tonight?" },
 				{ "5", "Hi! How was your day?" },
 				{ "6", "See you tonight darl :)" } };
-		Log.d("BrosApp--SQLHelper", "Ref_Message---Truncate");
+		Log.d("VidtureApp--SQLHelper", "Ref_Message---Truncate");
 		db.delete("Ref_Message", null, null);
-		Log.d("BrosApp--SQLHelper", "Ref_Message---Inserting");
+		Log.d("VidtureApp--SQLHelper", "Ref_Message---Inserting");
 
 		ContentValues insertValues;
 		for (int i = 0; i < data.length; i++) {
@@ -134,27 +134,29 @@ public class SQLHelper {
 			insertValues.put("message", data[i][1]);
 			insertValues.put("refID", -1);
 
-			Log.d("BrosApp--SQLHelper", "Ref_Message--" + data[i][1]);
+			Log.d("VidtureApp--SQLHelper", "Ref_Message--" + data[i][1]);
 			db.insert("Ref_Message", null, insertValues);
 
 		}
-		Log.d("BrosApp--SQLHelper", "Ref_Message--Data inserted");
+		Log.d("VidtureApp--SQLHelper", "Ref_Message--Data inserted");
 
 	}
 
-	public static void insertRefMessage(int ID, String message) {
+	public static void registerUser(int ID, String name,String email,String password) {
 
 		ContentValues insertValues = new ContentValues();
-		insertValues.put("message", message);
-		insertValues.put("refID", ID);
-		Log.d("BrosApp--SQLHelper", "Ref_Message--" + message);
-		db.insert("Ref_Message", null, insertValues);
+		insertValues.put("id", ID);
+		insertValues.put("name", name);
+		insertValues.put("email", email);
+		insertValues.put("password", password);
+		db.insert("user", null, insertValues);
+		Log.d("VidtureApp--SQLHelper", "User Registered--" + email);
 
 	}
 
 	public static Cursor getMessageList(int ID) {
 		// TODO Auto-generated method stub
-		Log.d(" BrosApp--SQLHelper", "Message--Querying Data");
+		Log.d(" VidtureApp--SQLHelper", "Message--Querying Data");
 		return db.rawQuery(
 				"select * from Ref_Message where refID = -1 or refID=" + ID,
 				null);
@@ -177,7 +179,7 @@ public class SQLHelper {
 
 	public static Cursor getLogMessageList(int iD) {
 		// TODO Auto-generated method stub
-		Log.d("BrosApp--SQLHelper", "Tran_Message--Fetching Log Message");
+		Log.d("VidtureApp--SQLHelper", "Tran_Message--Fetching Log Message");
 
 		return db
 				.rawQuery(
@@ -197,7 +199,7 @@ public class SQLHelper {
 		db.delete("Tran_Message", "ContactID=" + iD + " and MessageID = "
 				+ Integer.parseInt(msgID) + " ", null);
 
-		Log.d(" BrosApp--SQLHelper", "Log List--Data Deleted");
+		Log.d(" VidtureApp--SQLHelper", "Log List--Data Deleted");
 	}
 
 }

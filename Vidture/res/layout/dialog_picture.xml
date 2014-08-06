@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff" >
+
+    <TextView
+        android:id="@+id/terms_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="agree to vidture terms and conditions"
+        android:textColor="#4ba2dc" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/agree_text"
+        android:layout_margin="20dp"
+        android:background="@drawable/border"
+        android:hint="Name"
+        android:maxLength="20"
+        android:paddingLeft="10dip"
+        android:textColor="#dfdfdf"
+        android:textColorHint="#c6d9f1" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_margin="20dp"
+        android:background="@drawable/border"
+        android:hint="Date"
+        android:maxLength="20"
+        android:textColor="#dfdfdf"
+        android:textColorHint="#c6d9f1" />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/camera"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:textColor="#fff" />
+
+</RelativeLayout>
