@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_horizontal_margin"
+    android:focusable="true" android:focusableInTouchMode="true"
     >
 
     <LinearLayout
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="Contractual Document"
         android:textColor="#4ba2dc"
-        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textSize="23sp" 
         />
 
     <EditText
@@ -51,7 +52,8 @@
         android:inputType="textMultiLine"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarStyle="insideInset"
-        android:scrollbars="vertical" >
+        android:scrollbars="vertical" 
+        android:nextFocusUp="@id/document" android:nextFocusLeft="@id/document">
       
     </EditText>
 

@@ -2,51 +2,89 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff" >
+    android:background="#fff"
+    android:padding="20dip" >
 
-    <TextView
-        android:id="@+id/terms_text"
+    <LinearLayout
+        android:id="@+id/checktext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+ <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="agree to vidture terms and conditions"
-        android:textColor="#4ba2dc" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/checktext"
+        android:src="@drawable/squarecheckbox" />
+
+        <TextView
+            android:id="@+id/terms_text"
+            android:layout_width="199dp"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:paddingLeft="10dp"
+            android:text="agree to vidture terms and conditions"
+            android:textColor="#4ba2dc"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checktext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/camera"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:textColor="#fff" />
 
     <EditText
         android:id="@+id/name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/agree_text"
-        android:layout_margin="20dp"
+        android:layout_below="@+id/camera"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
         android:background="@drawable/border"
-        android:hint="Name"
+        android:ems="10"
+        android:hint="FULL NAME"
         android:maxLength="20"
         android:paddingLeft="10dip"
-        android:textColor="#dfdfdf"
-        android:textColorHint="#c6d9f1" />
+        android:textColor="#000"
+        android:textColorHint="#c6d9f1" >
+    </EditText>
 
     <EditText
         android:id="@+id/date"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name"
-        android:layout_margin="20dp"
+        android:layout_alignLeft="@+id/checktext"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="20dp"
         android:background="@drawable/border"
-        android:hint="Date"
+        android:ems="10"
+        android:hint="DATE"
         android:maxLength="20"
-        android:textColor="#dfdfdf"
-        android:textColorHint="#c6d9f1" />
+        android:textColor="#000"
+        android:textColorHint="#c6d9f1" >
+    </EditText>
 
     <Button
-        android:id="@+id/next"
+        android:id="@+id/nextbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date"
+        android:layout_below="@+id/date"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dip"
-        android:background="@drawable/camera"
-        android:paddingLeft="20dip"
-        android:paddingRight="20dip"
+        android:layout_marginTop="20dp"
+        android:background="#4ba2dc"
+        android:paddingLeft="40dip"
+        android:paddingRight="40dip"
+        android:text="Next"
         android:textColor="#fff" />
+
+   
 
 </RelativeLayout>
