@@ -37,20 +37,11 @@
         android:layout_below="@id/checktext"
         android:layout_alignParentRight="true">
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <CheckBox
+            android:id="@+id/checkBox1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/checktext"
-            android:src="@drawable/roundcheckbox" />
-
-        <TextView
-            android:id="@+id/agree_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="I agree"
-            android:paddingLeft="10dp"
+            android:text="I agree" 
             android:textColor="#4ba2dc"
             android:textSize="15sp" />
 

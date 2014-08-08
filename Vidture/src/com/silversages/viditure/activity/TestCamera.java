@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
-import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
@@ -42,7 +41,7 @@ public class TestCamera extends ViditureActivity implements
 
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	protected void setupView() {
 		// TODO Auto-generated method stub
@@ -82,6 +81,10 @@ public class TestCamera extends ViditureActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				camera.stopPreview();
+				camera.release();
+				camera = null;
+				previewing = false;
 				startActivity(new Intent(TestCamera.this, ReadSentence.class));
 			}
 		});
@@ -101,61 +104,6 @@ public class TestCamera extends ViditureActivity implements
 		}
 	}
 
-	 static Size getOptimalPreviewSize(List <Camera.Size>sizes, int w, int h) {
-         final double ASPECT_TOLERANCE = 0.1;
-         final double MAX_DOWNSIZE = 1.5;
-
-         double targetRatio = (double) w / h;
-         if (sizes == null) return null;
-
-         Size optimalSize = null;
-         double minDiff = Double.MAX_VALUE;
-
-         int targetHeight = h;
-
-         // Try to find an size match aspect ratio and size
-         for (Camera.Size size : sizes) {
-           double ratio = (double) size.width / size.height;
-           double downsize = (double) size.width / w;
-           if (downsize > MAX_DOWNSIZE) {
-             //if the preview is a lot larger than our display surface ignore it
-             //reason - on some phones there is not enough heap available to show the larger preview sizes
-             continue;
-           }
-           if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
-           if (Math.abs(size.height - targetHeight) < minDiff) {
-             optimalSize = size;
-             minDiff = Math.abs(size.height - targetHeight);
-           }
-         }
-         // Cannot find the one match the aspect ratio, ignore the requirement
-         //keep the max_downsize requirement
-         if (optimalSize == null) {
-           minDiff = Double.MAX_VALUE;
-           for (Size size : sizes) {
-             double downsize = (double) size.width / w;
-             if (downsize > MAX_DOWNSIZE) {
-               continue;
-             }
-             if (Math.abs(size.height - targetHeight) < minDiff) {
-               optimalSize = size;
-               minDiff = Math.abs(size.height - targetHeight);
-             }
-           }
-         }
-         //everything else failed, just take the closest match
-         if (optimalSize == null) {
-           minDiff = Double.MAX_VALUE;
-           for (Size size : sizes) {
-             if (Math.abs(size.height - targetHeight) < minDiff) {
-               optimalSize = size;
-               minDiff = Math.abs(size.height - targetHeight);
-             }
-           }
-         }
-         return optimalSize;
-       }
-	
 	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
@@ -172,15 +120,15 @@ public class TestCamera extends ViditureActivity implements
 				int SurfaceViewHeight = surafceView.getHeight();
 
 				List<Size> sizes = p.getSupportedPreviewSizes();
-				Size optimalSize = getOptimalPreviewSize(sizes,
+				Size optimalSize = CameraUtil.getOptimalPreviewSize(sizes,
 						SurfaceViewWidth, SurfaceViewHeight);
 
 				// set parameters
 				p.setPreviewSize(optimalSize.width, optimalSize.height);
-				//camera.setParameters(p);
+				// camera.setParameters(p);
 
 				camera.setPreviewDisplay(surfaceHolder);
-				
+
 				camera.startPreview();
 				previewing = true;
 			} catch (IOException e) {
@@ -199,8 +147,8 @@ public class TestCamera extends ViditureActivity implements
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
-		camera.stopPreview();
-		camera.release();
+		//camera.stopPreview();
+		//camera.release();
 		camera = null;
 		previewing = false;
 	}

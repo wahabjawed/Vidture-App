@@ -21,13 +21,11 @@
         android:textColor="#4ba2dc"
         android:textSize="22sp" />
 
-   <SurfaceView
-        android:id="@+id/surfaceView1"
-        android:layout_width="wrap_content"
+    <VideoView
+        android:id="@+id/videoView1"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="4"
-        android:scrollbarAlwaysDrawVerticalTrack="false" />
+        android:layout_weight="4" />
 
      <EditText
          android:id="@+id/name"
