@@ -41,7 +41,6 @@ public class TestCamera extends ViditureActivity implements
 
 	}
 
-	
 	@Override
 	protected void setupView() {
 		// TODO Auto-generated method stub
@@ -81,14 +80,23 @@ public class TestCamera extends ViditureActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				camera.stopPreview();
-				camera.release();
-				camera = null;
-				previewing = false;
+				
 				startActivity(new Intent(TestCamera.this, ReadSentence.class));
 			}
 		});
 
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		camera.stopPreview();
+		camera.release();
+		camera = null;
+		previewing = false;
+		super.onPause();
+
+	
 	}
 
 	@Override
@@ -104,7 +112,6 @@ public class TestCamera extends ViditureActivity implements
 		}
 	}
 
-	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
@@ -147,10 +154,13 @@ public class TestCamera extends ViditureActivity implements
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
-		//camera.stopPreview();
-		//camera.release();
-		camera = null;
-		previewing = false;
+		if (camera != null) {
+			camera.stopPreview();
+			camera.release();
+			camera = null;
+
+			previewing = false;
+		}
 	}
 
 	Camera.PictureCallback myPictureCallback_RAW = new Camera.PictureCallback() {

@@ -25,6 +25,7 @@
         android:id="@+id/videoView1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="4" />
 
      <EditText
@@ -48,8 +49,8 @@
     </EditText>
 
     <Button
-        android:id="@+id/vitureIt"
-        android:layout_width="wrap_content"
+        android:id="@+id/recordNew"
+        android:layout_width="200dip"
         android:layout_height="20dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
@@ -58,8 +59,24 @@
         android:background="#4ba2dc"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:text="Viditure It"
+        android:text="Record New"
         android:textColor="#fff"
         android:textSize="20sp" />
    
+    <Button
+        android:id="@+id/useThis"
+        android:layout_width="200dip"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.2"
+        android:background="#4ba2dc"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="Use This"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+   
+    
 </LinearLayout>

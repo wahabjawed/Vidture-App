@@ -44,6 +44,13 @@ public class ReadSentence extends ViditureActivity implements
 		getSupportActionBar().setTitle("Record");
 		setupView();
 
+		setupListner();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+
 		// Get Camera for preview
 		myCamera = getCameraInstance();
 		if (myCamera == null) {
@@ -53,14 +60,9 @@ public class ReadSentence extends ViditureActivity implements
 
 		surfaceHolder = surafceView.getHolder();
 		surfaceHolder.addCallback(this);
-		// deprecated setting, but required on Android versions prior to 3.0
 		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-		// myCameraSurfaceView = new MyCameraSurfaceView(this, myCamera);
-		// FrameLayout myCameraPreview = (FrameLayout)
-		// findViewById(R.id.videoview);
-		// myCameraPreview.addView(myCameraSurfaceView);
-		setupListner();
+		super.onResume();
 	}
 
 	@Override
@@ -82,6 +84,12 @@ public class ReadSentence extends ViditureActivity implements
 		try {
 			c = Camera.open(CameraUtil.getFrontCameraId());
 			c.setDisplayOrientation(90);
+			Camera.CameraInfo info = new Camera.CameraInfo();
+			Camera.getCameraInfo(CameraUtil.getFrontCameraId(), info);
+
+			Camera.Parameters params = c.getParameters();
+			params.setRotation(90);
+			c.setParameters(params);
 
 		} catch (Exception e) {
 			// Camera is not available (in use or does not exist)
@@ -103,8 +111,8 @@ public class ReadSentence extends ViditureActivity implements
 					// stop recording and release camera
 					mediaRecorder.stop(); // stop the recording
 					releaseMediaRecorder(); // release the MediaRecorder object
-
-					// recording=false;
+					vidtureIt.setText("Vidture It");
+					recording = false;
 
 					// Exit after saved
 					startActivity(new Intent(ReadSentence.this, ViewVideo.class));
@@ -146,7 +154,7 @@ public class ReadSentence extends ViditureActivity implements
 		mediaRecorder.setOutputFile("/sdcard/myvideo.mp4");
 		mediaRecorder.setMaxDuration(60000); // Set max duration 60 sec.
 		mediaRecorder.setMaxFileSize(5000000); // Set max file size 5M
-
+		mediaRecorder.setOrientationHint(270);
 		mediaRecorder.setPreviewDisplay(surafceView.getHolder().getSurface());
 
 		try {
@@ -233,6 +241,8 @@ public class ReadSentence extends ViditureActivity implements
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
-
+		releaseMediaRecorder(); // if you are using MediaRecorder, release it
+		// first
+		releaseCamera(); // release the camera immediately on pause event
 	}
 }

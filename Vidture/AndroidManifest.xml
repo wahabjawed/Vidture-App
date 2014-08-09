@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.silversages.viditure"
+<manifest package="com.silversages.viditure"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -37,7 +36,7 @@
         </activity>
         <activity android:name=".activity.Register" >
         </activity>
-        <activity android:name=".activity.DocumentViewer" >
+        <activity android:name=".activity.DocumentViewer" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,6 +49,7 @@
         </activity>
         <activity android:name=".activity.ViewVideo" >
         </activity>
+        <activity android:name=".activity.DocuemntName" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
