@@ -41,7 +41,7 @@ public class FetchDocRequest implements IRequestHandler {
 					FetchDocObject obj = gson.fromJson(result.toString(),
 							FetchDocObject.class);
 
-					Log.d("Document Request",obj.getMe().getFieldInputs()[0].getState()+"");
+					Log.d("Document Request",obj.getPages()[0].getPageImage_url()+"");
 				}
 			} catch (ParseException e1) {
 				e1.printStackTrace();
