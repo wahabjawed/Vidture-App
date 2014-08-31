@@ -26,9 +26,6 @@ public class NetworkManager {
 	static Context context = ViditureApp.getContext();
 	static NetworkInfo activeNetworkInfo;
 	static WifiManager mainWifi;
-	static WifiReceiver receiverWifi;
-	static List<ScanResult> wifiList;
-	static List<WifiConfiguration> LastWifi;
 
 	public static void Setup() {
 		connManager = (ConnectivityManager) context
@@ -61,42 +58,4 @@ public class NetworkManager {
 
 	}
 
-	public static void FetchWiFi() {
-		Setup();
-
-		mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-		mainWifi.setWifiEnabled(true);
-
-		receiverWifi = new WifiReceiver();
-		context.registerReceiver(receiverWifi, new IntentFilter(
-				WifiManager.WIFI_STATE_CHANGED_ACTION));
-
-	}
-
-	static class WifiReceiver extends BroadcastReceiver {
-		public void onReceive(Context c, Intent intent) {
-
-			int extraWifiState = intent.getIntExtra(
-					WifiManager.EXTRA_WIFI_STATE,
-					WifiManager.WIFI_STATE_UNKNOWN);
-
-			if (extraWifiState == WifiManager.WIFI_STATE_ENABLED) {
-
-				LastWifi = mainWifi.getConfiguredNetworks();
-				String[][] data = new String[LastWifi.size()][2];
-
-				for (int i = 0; i < LastWifi.size(); i++) {
-
-					Log.d("Wifi List", LastWifi.get(i).SSID);
-
-					data[i][0] = (LastWifi.get(i)).SSID;
-					data[i][1] = (LastWifi.get(i)).BSSID;
-
-				}
-				ViditureApp.WifiList = data;
-				context.unregisterReceiver(receiverWifi);
-			}
-			
-		}
-	}
 }

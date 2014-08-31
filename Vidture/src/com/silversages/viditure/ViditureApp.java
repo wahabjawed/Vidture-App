@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 public class ViditureApp extends Application {
 	public static SQLiteDatabase db;
 	public static Context context;
-	public static String[][] WifiList;
 	
 
 	public static SQLiteDatabase getDb() {
