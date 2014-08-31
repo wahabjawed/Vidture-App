@@ -8,7 +8,97 @@ public class FetchDocObject {
 	String name;
 	String description;
 	String self_url;
+	String fields_url;
+	String ownerCompany;
+	String owner;
+	String id;
+	String shortId;
+	String state;
+	String fromtemplate;
+	String templateId;
+	String[] allRecipients;
 	meProfile me;
+	Pages[] pages;
+
+	public Pages[] getPages() {
+		return pages;
+	}
+
+	public void setPages(Pages[] pages) {
+		this.pages = pages;
+	}
+
+	public String getFields_url() {
+		return fields_url;
+	}
+
+	public void setFields_url(String fields_url) {
+		this.fields_url = fields_url;
+	}
+
+	public String getOwnerCompany() {
+		return ownerCompany;
+	}
+
+	public void setOwnerCompany(String ownerCompany) {
+		this.ownerCompany = ownerCompany;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getShortId() {
+		return shortId;
+	}
+
+	public void setShortId(String shortId) {
+		this.shortId = shortId;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getFromtemplate() {
+		return fromtemplate;
+	}
+
+	public void setFromtemplate(String fromtemplate) {
+		this.fromtemplate = fromtemplate;
+	}
+
+	public String getTemplateId() {
+		return templateId;
+	}
+
+	public void setTemplateId(String templateId) {
+		this.templateId = templateId;
+	}
+
+	public String[] getAllRecipients() {
+		return allRecipients;
+	}
+
+	public void setAllRecipients(String[] allRecipients) {
+		this.allRecipients = allRecipients;
+	}
 
 	public meProfile getMe() {
 		return me;
@@ -64,6 +154,267 @@ public class FetchDocObject {
 
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+
+	public class Pages {
+
+		int pageNumber;
+		String pageImage_url;
+		String thumbImage_url;
+		boolean needsInput;
+		Fields[] fields;
+		PagePosition pagePosition;
+
+		public Fields[] getFields() {
+			return fields;
+		}
+
+		public void setFields(Fields[] fields) {
+			this.fields = fields;
+		}
+
+		public PagePosition getPagePosition() {
+			return pagePosition;
+		}
+
+		public void setPagePosition(PagePosition pagePosition) {
+			this.pagePosition = pagePosition;
+		}
+
+		public int getPageNumber() {
+			return pageNumber;
+		}
+
+		public void setPageNumber(int pageNumber) {
+			this.pageNumber = pageNumber;
+		}
+
+		public String getPageImage_url() {
+			return pageImage_url;
+		}
+
+		public void setPageImage_url(String pageImage_url) {
+			this.pageImage_url = pageImage_url;
+		}
+
+		public String getThumbImage_url() {
+			return thumbImage_url;
+		}
+
+		public void setThumbImage_url(String thumbImage_url) {
+			this.thumbImage_url = thumbImage_url;
+		}
+
+		public boolean isNeedsInput() {
+			return needsInput;
+		}
+
+		public void setNeedsInput(boolean needsInput) {
+			this.needsInput = needsInput;
+		}
+
+		public class Fields {
+
+			String fieldPosition;
+			boolean required;
+			Kind kind;
+			ScreenPos screenPos;
+			FieldInput fieldInput;
+
+			public String getFieldPosition() {
+				return fieldPosition;
+			}
+
+			public void setFieldPosition(String fieldPosition) {
+				this.fieldPosition = fieldPosition;
+			}
+
+			public boolean isRequired() {
+				return required;
+			}
+
+			public void setRequired(boolean required) {
+				this.required = required;
+			}
+
+			public Kind getKind() {
+				return kind;
+			}
+
+			public void setKind(Kind kind) {
+				this.kind = kind;
+			}
+
+			public ScreenPos getScreenPos() {
+				return screenPos;
+			}
+
+			public void setScreenPos(ScreenPos screenPos) {
+				this.screenPos = screenPos;
+			}
+
+			public FieldInput getFieldInput() {
+				return fieldInput;
+			}
+
+			public void setFieldInput(FieldInput fieldInput) {
+				this.fieldInput = fieldInput;
+			}
+
+			public class Kind {
+				String type;
+				String name;
+				String fieldImage_url;
+
+				public String getType() {
+					return type;
+				}
+
+				public void setType(String type) {
+					this.type = type;
+				}
+
+				public String getName() {
+					return name;
+				}
+
+				public void setName(String name) {
+					this.name = name;
+				}
+
+				public String getFieldImage_url() {
+					return fieldImage_url;
+				}
+
+				public void setFieldImage_url(String fieldImage_url) {
+					this.fieldImage_url = fieldImage_url;
+				}
+
+			}
+
+			public class ScreenPos {
+
+				int top;
+				int left;
+				int width;
+				int height;
+
+				public int getTop() {
+					return top;
+				}
+
+				public void setTop(int top) {
+					this.top = top;
+				}
+
+				public int getLeft() {
+					return left;
+				}
+
+				public void setLeft(int left) {
+					this.left = left;
+				}
+
+				public int getWidth() {
+					return width;
+				}
+
+				public void setWidth(int width) {
+					this.width = width;
+				}
+
+				public int getHeight() {
+					return height;
+				}
+
+				public void setHeight(int height) {
+					this.height = height;
+				}
+
+			}
+
+			public class FieldInput {
+
+				String fieldPosition;
+				String data;
+				String state;
+				String screenPos;
+
+				public String getFieldPosition() {
+					return fieldPosition;
+				}
+
+				public void setFieldPosition(String fieldPosition) {
+					this.fieldPosition = fieldPosition;
+				}
+
+				public String getData() {
+					return data;
+				}
+
+				public void setData(String data) {
+					this.data = data;
+				}
+
+				public String getState() {
+					return state;
+				}
+
+				public void setState(String state) {
+					this.state = state;
+				}
+
+				public String getScreenPos() {
+					return screenPos;
+				}
+
+				public void setScreenPos(String screenPos) {
+					this.screenPos = screenPos;
+				}
+
+			}
+
+		}
+
+		public class PagePosition {
+			int top;
+			int left;
+			int width;
+			int height;
+
+			public int getTop() {
+				return top;
+			}
+
+			public void setTop(int top) {
+				this.top = top;
+			}
+
+			public int getLeft() {
+				return left;
+			}
+
+			public void setLeft(int left) {
+				this.left = left;
+			}
+
+			public int getWidth() {
+				return width;
+			}
+
+			public void setWidth(int width) {
+				this.width = width;
+			}
+
+			public int getHeight() {
+				return height;
+			}
+
+			public void setHeight(int height) {
+				this.height = height;
+			}
+
+		}
 	}
 
 	public class meProfile {
@@ -230,35 +581,42 @@ public class FetchDocObject {
 		public void setFullName(String fullName) {
 			this.fullName = fullName;
 		}
-		
-		public class FieldInputs{
-			
-			
+
+		public class FieldInputs {
+
 			String fieldPosition;
 			String data;
 			String state;
 			String screenPos;
+
 			public String getFieldPosition() {
 				return fieldPosition;
 			}
+
 			public void setFieldPosition(String fieldPosition) {
 				this.fieldPosition = fieldPosition;
 			}
+
 			public String getData() {
 				return data;
 			}
+
 			public void setData(String data) {
 				this.data = data;
 			}
+
 			public String getState() {
 				return state;
 			}
+
 			public void setState(String state) {
 				this.state = state;
 			}
+
 			public String getScreenPos() {
 				return screenPos;
 			}
+
 			public void setScreenPos(String screenPos) {
 				this.screenPos = screenPos;
 			}
