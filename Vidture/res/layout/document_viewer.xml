@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_horizontal_margin"
-    android:focusable="true" android:focusableInTouchMode="true"
-    >
+    android:paddingTop="@dimen/activity_horizontal_margin" >
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,40 +22,34 @@
             android:id="@+id/imageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/print" 
-            android:background="#fff"/>
+            android:background="#fff"
+            android:src="@drawable/print" />
 
         <ImageButton
             android:id="@+id/imageButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/clip" 
-            android:background="#fff"/>
-    
+            android:background="#fff"
+            android:src="@drawable/clip" />
     </LinearLayout>
-    
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Contractual Document"
         android:textColor="#4ba2dc"
-        android:textSize="23sp" 
-        />
+        android:textSize="23sp" />
 
-    <EditText
+    <ListView
         android:id="@+id/document"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
         android:ems="10"
-        android:inputType="textMultiLine"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarStyle="insideInset"
-        android:scrollbars="vertical" 
-        android:nextFocusUp="@id/document" android:nextFocusLeft="@id/document">
-      
-    </EditText>
+        android:scrollbars="vertical" />
 
     <Button
         android:id="@+id/startVituring"

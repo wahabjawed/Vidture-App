@@ -9,19 +9,25 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.silversages.viditure.R;
 import com.silversages.viditure.NetworkRequest.FetchDocRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
+import com.silversages.viditure.adapter.DashboardAdapter;
+import com.silversages.viditure.adapter.DocumentAdapter;
+import com.silversages.viditure.objects.DocumentObject;
+import com.silversages.viditure.objects.ObjectHolder;
 
 public class DocumentViewer extends ViditureNetworkActivity {
 
-	EditText docuemnt;
+	ListView docuemnt;
 	Button startVituring;
 	Dialog dialog_camera;
 	Dialog dialog_agree;
 	Dialog dialog_date;
+	DocumentAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,12 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	public void postRequestExecute() {
 		// TODO Auto-generated method stub
 
+		DocumentObject[] documentItem = ObjectHolder.getDocObj()
+				.getDocumentobject();
+
+		adapter = new DocumentAdapter(this, documentItem);
+		docuemnt.setAdapter(adapter);
+
 	}
 
 	@Override
@@ -66,7 +78,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	protected void setupView() {
 		// TODO Auto-generated method stub
 
-		docuemnt = (EditText) findViewById(R.id.document);
+		docuemnt = (ListView) findViewById(R.id.document);
 		startVituring = (Button) findViewById(R.id.startVituring);
 		dialog_camera = new Dialog(DocumentViewer.this);
 		dialog_agree = new Dialog(DocumentViewer.this);

@@ -11,7 +11,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
-import com.silversages.viditure.objects.FetchDocObject;
+import com.silversages.viditure.objects.ObjectHolder;
+import com.silversages.viditure.objects.fetchDocument.FetchDocObject;
 import com.silversages.viditure.util.JSONParser;
 
 public class FetchDocRequest implements IRequestHandler {
@@ -28,6 +29,19 @@ public class FetchDocRequest implements IRequestHandler {
 	class Task extends AsyncTask<Void, Void, JSONObject> {
 
 		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			activity.preRequestExecute();
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			// TODO Auto-generated method stub
+			super.onProgressUpdate(values);
+		}
+
+		@Override
 		protected void onPostExecute(JSONObject result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
@@ -35,13 +49,14 @@ public class FetchDocRequest implements IRequestHandler {
 			try {
 				if (result != null) {
 					Gson gson = new Gson();
-					JSONObject json_data = result;
-					String gsonS = gson.toJson(result);
+					// JSONObject json_data = result;
+					// String gsonS = gson.toJson(result);
 
-					FetchDocObject obj = gson.fromJson(result.toString(),
-							FetchDocObject.class);
 
-					Log.d("Document Request",obj.getPages()[0].getPageImage_url()+"");
+					ObjectHolder.setDocObj(gson.fromJson(result.toString(),
+							FetchDocObject.class));
+					activity.postRequestExecute();
+					Log.d("Document Request",ObjectHolder.getDocObj().getPages()[0].getPageImage_url()+"");
 				}
 			} catch (ParseException e1) {
 				e1.printStackTrace();
