@@ -1,16 +1,15 @@
 package com.silversages.viditure.objects;
 
-import android.graphics.Bitmap;
-
 public class DocumentObject {
 
-	String img;
+	String imgURL;
 
-	public String getImg() {
-		return img;
+	public String getImgURL() {
+		return imgURL;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setImgURL(String imgURL) {
+		this.imgURL = imgURL;
 	}
+
 }

@@ -54,8 +54,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	public void postRequestExecute() {
 		// TODO Auto-generated method stub
 
-		DocumentObject[] documentItem = ObjectHolder.getDocObj()
-				.getDocumentobject();
+		DocumentObject[] documentItem = ObjectHolder.getDocumentobject();
 
 		adapter = new DocumentAdapter(this, documentItem);
 		docuemnt.setAdapter(adapter);

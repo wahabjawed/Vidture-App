@@ -1,5 +1,7 @@
 package com.silversages.viditure.objects.fetchDocument;
 
+import android.util.Log;
+
 import com.silversages.viditure.objects.DocumentObject;
 
 public class FetchDocObject {
@@ -22,16 +24,7 @@ public class FetchDocObject {
 	meProfile me;
 	Pages[] pages;
 
-	public DocumentObject[] getDocumentobject() {
-
-		DocumentObject[] docObj = new DocumentObject[pages.length];
-
-		for (int i = 0; i < docObj.length; i++) {
-
-			docObj[i].setImg(pages[i].getPageImage_url());
-		}
-		return docObj;
-	}
+	
 
 	public Pages[] getPages() {
 		return pages;
@@ -169,6 +162,8 @@ public class FetchDocObject {
 		this.filename = filename;
 	}
 
+
+	
 	public class meProfile {
 
 		String fullName;
