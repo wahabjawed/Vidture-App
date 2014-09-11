@@ -14,8 +14,6 @@ public abstract class ViditureActivity extends ActionBarActivity{
 	
 	protected abstract void setupListner();
 	
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

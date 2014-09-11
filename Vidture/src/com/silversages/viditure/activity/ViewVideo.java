@@ -64,7 +64,7 @@ public class ViewVideo extends ViditureActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				startActivity(new Intent(ViewVideo.this, DocuemntName.class));
+				startActivity(new Intent(ViewVideo.this, DocumentName.class));
 			}
 		});
 

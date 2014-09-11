@@ -50,9 +50,8 @@ public class DocumentAdapter extends ArrayAdapter<DocumentObject> {
 		DocumentObject obj = data[position];
 		if (obj.getImgURL() != null) {
 
-			Ion.with(holder.documentPic)
-					.placeholder(R.drawable.image)
-					.load("http://54.183.77.229:8080/rbs/documents/53f8d90ae4b0e2d5a4aae1c6/pages/0/image");
+			Ion.with(holder.documentPic).placeholder(R.drawable.image)
+					.load(obj.getImgURL().trim().toString());
 
 			// Bitmap bmp = BitmapFactory.decodeByteArray(obj.getImg(), 0,
 			// obj.getImg().length);

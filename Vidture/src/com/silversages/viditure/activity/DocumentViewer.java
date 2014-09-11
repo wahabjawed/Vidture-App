@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.silversages.viditure.R;
@@ -101,6 +102,35 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		dialog_date.getWindow().setBackgroundDrawableResource(
 				R.drawable.dialogbox);
 
+		dialog_agree.setContentView(R.layout.dialog_name);
+		dialog_agree.getWindow().setBackgroundDrawableResource(
+				R.drawable.dialogbox);
+
+		Button viture = (Button) dialog_agree.findViewById(R.id.viture);
+		// if decline button is clicked, close the custom dialog
+		viture.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// Close dialog
+
+				dialog_camera.show();
+			}
+		});
+
+		TextView esignature = (TextView) dialog_agree
+				.findViewById(R.id.esignature_label);
+
+		// set values for custom dialog components - text, image and
+		// button
+		esignature.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dialog_date.show();
+			}
+		});
+
 		Button use_signature = (Button) dialog_date
 				.findViewById(R.id.use_signature);
 		// if decline button is clicked, close the custom dialog
@@ -109,7 +139,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			public void onClick(View v) {
 				// Close dialog
 
-				dialog_camera.show();
+				startActivity(new Intent(DocumentViewer.this, DocumentName.class));
 			}
 		});
 
@@ -125,7 +155,6 @@ public class DocumentViewer extends ViditureNetworkActivity {
 				dialog_camera.cancel();
 				dialog_date.cancel();
 				startActivity(new Intent(DocumentViewer.this, TestCamera.class));
-
 			}
 		});
 
@@ -133,35 +162,9 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 			@Override
 			public void onClick(View arg0) {
-
-				// Create custom dialog object
-
-				// Include dialog.xml file
-
-				dialog_agree.setContentView(R.layout.dialog_name);
-				dialog_agree.getWindow().setBackgroundDrawableResource(
-						R.drawable.dialogbox);
-
-				// set values for custom dialog components - text, image and
-				// button
-
 				dialog_agree.show();
-
-				Button viture = (Button) dialog_agree.findViewById(R.id.viture);
-				// if decline button is clicked, close the custom dialog
-				viture.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// Close dialog
-
-						dialog_date.show();
-					}
-				});
-
 			}
-
 		});
-
 	}
 
 	@Override

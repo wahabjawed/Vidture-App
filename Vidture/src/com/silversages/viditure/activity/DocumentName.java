@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
 
-public class DocuemntName extends ViditureActivity {
+public class DocumentName extends ViditureActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

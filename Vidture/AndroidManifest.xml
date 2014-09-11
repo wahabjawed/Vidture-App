@@ -63,7 +63,7 @@
         <activity android:name=".activity.ViewVideo" >
         </activity>
         <activity
-            android:name=".activity.DocuemntName"
+            android:name=".activity.DocumentName"
             android:screenOrientation="portrait" >
         </activity>
     </application>

@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    android:gravity="right"
+    android:gravity="left"
     android:padding="20dip" >
 
     <LinearLayout
@@ -72,5 +72,16 @@
         android:paddingRight="40dip"
         android:text="Viditure"
         android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/esignature_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/viture"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:text="esignature"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#B8B8B8" />
 
 </RelativeLayout>
