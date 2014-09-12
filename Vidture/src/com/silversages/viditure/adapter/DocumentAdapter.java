@@ -51,7 +51,7 @@ public class DocumentAdapter extends ArrayAdapter<DocumentObject> {
 		if (obj.getImgURL() != null) {
 
 			Ion.with(holder.documentPic).placeholder(R.drawable.image)
-					.load(obj.getImgURL().trim().toString());
+					.load(obj.getImgURL());
 
 			// Bitmap bmp = BitmapFactory.decodeByteArray(obj.getImg(), 0,
 			// obj.getImg().length);

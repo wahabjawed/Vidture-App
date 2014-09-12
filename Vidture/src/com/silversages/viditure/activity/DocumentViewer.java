@@ -8,15 +8,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.silversages.viditure.R;
 import com.silversages.viditure.NetworkRequest.FetchDocRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
-import com.silversages.viditure.adapter.DashboardAdapter;
 import com.silversages.viditure.adapter.DocumentAdapter;
 import com.silversages.viditure.objects.DocumentObject;
 import com.silversages.viditure.objects.ObjectHolder;
@@ -44,7 +41,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			// may be some test here with your custom uri
 			String var = uri.getQueryParameter("documents"); // "str" is set
 			String path = uri.getEncodedPath();
-			showToast(uri.getPath(), Toast.LENGTH_LONG);
+			// showToast(uri.getPath(), Toast.LENGTH_LONG);
 
 			new FetchDocRequest(path).PerformTask(this);
 		}
@@ -54,6 +51,9 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	@Override
 	public void postRequestExecute() {
 		// TODO Auto-generated method stub
+
+		showToast(ObjectHolder.getDocObj().getPages()[0].getPageImage_url(),
+				Toast.LENGTH_LONG);
 
 		DocumentObject[] documentItem = ObjectHolder.getDocumentobject();
 
@@ -139,7 +139,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			public void onClick(View v) {
 				// Close dialog
 
-				startActivity(new Intent(DocumentViewer.this, DocumentName.class));
+				startActivity(new Intent(DocumentViewer.this,
+						DocumentName.class));
 			}
 		});
 

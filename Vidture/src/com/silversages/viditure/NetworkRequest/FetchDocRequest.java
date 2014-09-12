@@ -52,11 +52,10 @@ public class FetchDocRequest implements IRequestHandler {
 					// JSONObject json_data = result;
 					// String gsonS = gson.toJson(result);
 
-
 					ObjectHolder.setDocObj(gson.fromJson(result.toString(),
 							FetchDocObject.class));
 					activity.postRequestExecute();
-					Log.d("Document Request",ObjectHolder.getDocObj().getPages()[0].getPageImage_url()+"");
+
 				}
 			} catch (ParseException e1) {
 				e1.printStackTrace();
@@ -72,7 +71,7 @@ public class FetchDocRequest implements IRequestHandler {
 			JSONParser sendData = new JSONParser();
 			JSONObject result = sendData.makeHttpRequest(networkAddress + URL,
 					"GET", nameValuePairs);
-			Log.d("Vidture", "finish sending register info");
+			Log.d("Vidture", "URL: " + networkAddress + URL);
 
 			return result;
 
