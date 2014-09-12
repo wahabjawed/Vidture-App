@@ -34,7 +34,7 @@ public class Pages {
 	}
 
 	public String getPageImage_url() {
-		return pageImage_url;
+		return pageImage_url.replace("dev.viditure.com", "54.183.77.229:8080");
 	}
 
 	public void setPageImage_url(String pageImage_url) {
