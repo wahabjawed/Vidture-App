@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.silversages.viditure.R;
-import com.silversages.viditure.NetworkRequest.LoginRequest;
+import com.silversages.viditure.Network.Request.LoginRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
 import com.silversages.viditure.util.NetworkManager;
 

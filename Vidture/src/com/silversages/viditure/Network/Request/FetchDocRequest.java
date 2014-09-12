@@ -1,4 +1,4 @@
-package com.silversages.viditure.NetworkRequest;
+package com.silversages.viditure.Network.Request;
 
 import java.util.ArrayList;
 

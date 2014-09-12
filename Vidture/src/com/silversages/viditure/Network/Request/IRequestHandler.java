@@ -1,4 +1,4 @@
-package com.silversages.viditure.NetworkRequest;
+package com.silversages.viditure.Network.Request;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -7,6 +7,33 @@ import com.silversages.viditure.objects.fetchDocument.FetchDocObject;
 public class ObjectHolder {
 
 	private static FetchDocObject docObj;
+	private static SignatureDObject signatureDObj;
+	private static AcceptDObject acceptDObj;
+	private static CameraDObject cameraDObj;
+
+	public static SignatureDObject getSignatureDObj() {
+		return signatureDObj;
+	}
+
+	public static void setSignatureDObj(SignatureDObject signatureDObj) {
+		ObjectHolder.signatureDObj = signatureDObj;
+	}
+
+	public static AcceptDObject getAcceptDObj() {
+		return acceptDObj;
+	}
+
+	public static void setAcceptDObj(AcceptDObject acceptDObj) {
+		ObjectHolder.acceptDObj = acceptDObj;
+	}
+
+	public static CameraDObject getCameraDObj() {
+		return cameraDObj;
+	}
+
+	public static void setCameraDObj(CameraDObject cameraDObj) {
+		ObjectHolder.cameraDObj = cameraDObj;
+	}
 
 	public static FetchDocObject getDocObj() {
 		return docObj;
@@ -16,7 +43,7 @@ public class ObjectHolder {
 		ObjectHolder.docObj = docObj;
 	}
 
-	public static DocumentObject[] getDocumentobject() {
+	public static DocumentObject[] getDocumentImageObject() {
 
 		DocumentObject[] docObj = new DocumentObject[getDocObj().getPages().length];
 
