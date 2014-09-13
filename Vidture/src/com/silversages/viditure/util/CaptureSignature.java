@@ -40,7 +40,7 @@ public class CaptureSignature extends Activity {
 	public static String tempDir;
 	public int count = 1;
 	public String current = null;
-	private Bitmap mBitmap;
+	
 	View mView;
 	File mypath;
 
@@ -201,7 +201,7 @@ public class CaptureSignature extends Activity {
 		private static final float HALF_STROKE_WIDTH = STROKE_WIDTH / 2;
 		private Paint paint = new Paint();
 		private Path path = new Path();
-
+		private Bitmap mBitmap;
 		private float lastTouchX;
 		private float lastTouchY;
 		private final RectF dirtyRect = new RectF();
