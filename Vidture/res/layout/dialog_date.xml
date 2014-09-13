@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
+    android:gravity="right"
     android:padding="20dip" >
 
     <TextView
@@ -16,11 +17,11 @@
     <LinearLayout
         android:id="@+id/signature"
         android:layout_width="fill_parent"
-        android:layout_height="70dip"
+        android:layout_height="80dip"
         android:layout_alignParentRight="true"
         android:layout_below="@id/heading"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal"
         android:background="@drawable/border"
          />
@@ -51,5 +52,13 @@
         android:paddingRight="20dip"
         android:text="Use this signature"
         android:textColor="#fff" />
+
+    <ImageView
+        android:id="@+id/clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/signature"
+        android:layout_alignTop="@+id/heading"
+        android:src="@drawable/clip" />
 
 </RelativeLayout>

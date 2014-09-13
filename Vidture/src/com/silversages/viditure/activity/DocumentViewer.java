@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,7 +42,6 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 	View mView;
 	Signature mSignature;
-	Button mClear, mGetSign, mCancel;
 	LinearLayout mContent;
 	File mypath;
 	public static String tempDir;
@@ -146,6 +146,15 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		mContent.addView(mSignature, LayoutParams.FILL_PARENT,
 				LayoutParams.FILL_PARENT);
 		mView = mContent;
+		ImageView clear = (ImageView) dialog_date.findViewById(R.id.clear);
+		clear.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				mSignature.clear();
+			}
+		});
 
 		Button viture = (Button) dialog_agree.findViewById(R.id.viture);
 		// if decline button is clicked, close the custom dialog
@@ -179,6 +188,9 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			@Override
 			public void onClick(View v) {
 				// Close dialog
+
+				mView.setDrawingCacheEnabled(true);
+				// mSignature.save(mView);
 
 				startActivity(new Intent(DocumentViewer.this,
 						DocumentName.class));
