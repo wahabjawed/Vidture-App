@@ -2,9 +2,11 @@ package com.silversages.viditure.activity;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Calendar;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,12 +16,14 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore.Images;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -42,12 +46,17 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	Dialog dialog_agree;
 	Dialog dialog_date;
 	DocumentAdapter adapter;
+
 	private Bitmap mBitmap;
 	View mView;
 	signature mSignature;
 	Button mClear, mGetSign, mCancel;
 	LinearLayout mContent;
 	File mypath;
+	public static String tempDir;
+	public int count = 1;
+	public String current = null;
+	private String uniqueId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +137,24 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		dialog_agree.getWindow().setBackgroundDrawableResource(
 				R.drawable.dialogbox);
 
+		tempDir = Environment.getExternalStorageDirectory() + "/"
+				+ "GetSignature" + "/";
+		ContextWrapper cw = new ContextWrapper(getApplicationContext());
+		File directory = cw.getDir("GetSignature", Context.MODE_PRIVATE);
+
+		prepareDirectory();
+		uniqueId = getTodaysDate() + "_" + getCurrentTime() + "_"
+				+ Math.random();
+		current = uniqueId + ".png";
+		mypath = new File(directory, current);
+
+		mContent = (LinearLayout) dialog_date.findViewById(R.id.signature);
+		mSignature = new signature(this, null);
+		mSignature.setBackgroundColor(Color.WHITE);
+		mContent.addView(mSignature, LayoutParams.FILL_PARENT,
+				LayoutParams.FILL_PARENT);
+		mView = mContent;
+
 		Button viture = (Button) dialog_agree.findViewById(R.id.viture);
 		// if decline button is clicked, close the custom dialog
 		viture.setOnClickListener(new OnClickListener() {
@@ -197,6 +224,60 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 	}
 
+	private String getTodaysDate() {
+
+		final Calendar c = Calendar.getInstance();
+		int todaysDate = (c.get(Calendar.YEAR) * 10000)
+				+ ((c.get(Calendar.MONTH) + 1) * 100)
+				+ (c.get(Calendar.DAY_OF_MONTH));
+		Log.w("DATE:", String.valueOf(todaysDate));
+		return (String.valueOf(todaysDate));
+
+	}
+
+	private String getCurrentTime() {
+
+		final Calendar c = Calendar.getInstance();
+		int currentTime = (c.get(Calendar.HOUR_OF_DAY) * 10000)
+				+ (c.get(Calendar.MINUTE) * 100) + (c.get(Calendar.SECOND));
+		Log.w("TIME:", String.valueOf(currentTime));
+		return (String.valueOf(currentTime));
+
+	}
+
+	private boolean prepareDirectory() {
+		try {
+			if (makedirs()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Toast.makeText(
+					this,
+					"Could not initiate File System.. Is Sdcard mounted properly?",
+					1000).show();
+			return false;
+		}
+	}
+
+	private boolean makedirs() {
+		File tempdir = new File(tempDir);
+		if (!tempdir.exists())
+			tempdir.mkdirs();
+
+		if (tempdir.isDirectory()) {
+			File[] files = tempdir.listFiles();
+			for (File file : files) {
+				if (!file.delete()) {
+					System.out.println("Failed to delete " + file);
+				}
+			}
+		}
+		return (tempdir.isDirectory());
+	}
+
 	public class signature extends View {
 		private static final float STROKE_WIDTH = 5f;
 		private static final float HALF_STROKE_WIDTH = STROKE_WIDTH / 2;
@@ -260,7 +341,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		public boolean onTouchEvent(MotionEvent event) {
 			float eventX = event.getX();
 			float eventY = event.getY();
-			mGetSign.setEnabled(true);
+			//mGetSign.setEnabled(true);
 
 			switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:

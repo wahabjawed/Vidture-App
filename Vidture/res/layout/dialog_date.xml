@@ -2,9 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff" 
-    android:padding="20dip"
-    >
+    android:background="#fff"
+    android:padding="20dip" >
 
     <TextView
         android:id="@+id/heading"
@@ -14,17 +13,17 @@
         android:text="eSignature"
         android:textColor="#dfdfdf" />
 
-    <EditText
+    <LinearLayout
         android:id="@+id/signature"
         android:layout_width="fill_parent"
-        android:layout_height="60dip"
+        android:layout_height="70dip"
         android:layout_alignParentRight="true"
         android:layout_below="@id/heading"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
         android:background="@drawable/border"
-        android:maxLines="3"
-        android:textColor="#000" />
+         />
 
     <EditText
         android:id="@+id/dated"
@@ -39,8 +38,6 @@
         android:maxLength="20"
         android:textColor="#000"
         android:textColorHint="#c6d9f1" >
-
-        
     </EditText>
 
     <Button
@@ -53,7 +50,6 @@
         android:paddingLeft="20dip"
         android:paddingRight="20dip"
         android:text="Use this signature"
-        android:textColor="#fff" 
-        />
+        android:textColor="#fff" />
 
 </RelativeLayout>
