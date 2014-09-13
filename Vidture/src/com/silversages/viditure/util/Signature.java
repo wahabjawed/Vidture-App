@@ -18,20 +18,21 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 public class Signature extends View {
-	private static final float STROKE_WIDTH = 5f;
+	private static final float STROKE_WIDTH = 4f;
 	private static final float HALF_STROKE_WIDTH = STROKE_WIDTH / 2;
 	private Paint paint = new Paint();
 	private Path path = new Path();
-
 	private float lastTouchX;
 	private float lastTouchY;
 	private final RectF dirtyRect = new RectF();
 	private Bitmap mBitmap;
 	LinearLayout mContent;
 	File mypath;
+	Context context;
 
 	public Signature(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		this.context = context;
 		paint.setAntiAlias(true);
 		paint.setColor(Color.BLACK);
 		paint.setStyle(Paint.Style.STROKE);
@@ -47,8 +48,8 @@ public class Signature extends View {
 	}
 
 	public void save(View v) {
-		Log.v("log_tag", "Width: " + v.getWidth());
-		Log.v("log_tag", "Height: " + v.getHeight());
+		Log.e("log_tag", "Width: " + v.getWidth());
+		Log.e("log_tag", "Height: " + v.getHeight());
 		if (mBitmap == null) {
 			mBitmap = Bitmap.createBitmap(mContent.getWidth(),
 					mContent.getHeight(), Bitmap.Config.RGB_565);
@@ -63,9 +64,9 @@ public class Signature extends View {
 			mFileOutStream.flush();
 			mFileOutStream.close();
 
-			// String url = Images.Media.insertImage(getContentResolver(),
-			// mBitmap, "title", null);
-			// Log.v("log_tag", "url: " + url);
+			 String url = Images.Media.insertImage(context.getContentResolver(),
+			 mBitmap, "title", null);
+			 Log.e("log_tag", "url: " + url);
 
 			// In case you want to delete the file
 			// boolean deleted = mypath.delete();
@@ -74,7 +75,7 @@ public class Signature extends View {
 			// converter
 
 		} catch (Exception e) {
-			Log.v("log_tag", e.toString());
+			Log.e("log_tag", e.toString());
 		}
 	}
 
@@ -92,7 +93,6 @@ public class Signature extends View {
 	public boolean onTouchEvent(MotionEvent event) {
 		float eventX = event.getX();
 		float eventY = event.getY();
-		// mGetSign.setEnabled(true);
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:

@@ -190,7 +190,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 				// Close dialog
 
 				mView.setDrawingCacheEnabled(true);
-				// mSignature.save(mView);
+				mSignature.save(mView);
 
 				startActivity(new Intent(DocumentViewer.this,
 						DocumentName.class));
