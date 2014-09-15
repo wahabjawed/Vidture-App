@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.silversages.viditure.R;
 import com.silversages.viditure.Networks.request.LoginRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
-import com.silversages.viditure.util.NetworkManager;
 
 public class Login extends ViditureNetworkActivity {
 
@@ -60,7 +59,7 @@ public class Login extends ViditureNetworkActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				if(NetworkManager.IsConnected()){
+				if(Zainu.getNetworkManager().IsConnected()){
 				
 					new LoginRequest(email.getText().toString(), password.getText()
 						.toString()).PerformTask(Login.this);

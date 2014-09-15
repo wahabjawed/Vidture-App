@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.silversages.viditure.R;
 import com.silversages.viditure.Networks.request.FetchDocRequest;
@@ -27,7 +26,6 @@ import com.silversages.viditure.abstracts.ViditureNetworkActivity;
 import com.silversages.viditure.adapter.DocumentAdapter;
 import com.silversages.viditure.objects.ObjectHolder;
 import com.silversages.viditure.objects.fetchDocument.Pages;
-import com.silversages.viditure.util.DateTime;
 import com.silversages.viditure.util.Signature;
 
 public class DocumentViewer extends ViditureNetworkActivity {
@@ -60,11 +58,11 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		if (Intent.ACTION_VIEW.equals(intent.getAction())) {
 			Uri uri = intent.getData();
 			// may be some test here with your custom uri
-			String var = uri.getQueryParameter("documents"); // "str" is set
-			String path = uri.getEncodedPath();
+			// String var = uri.getQueryParameter("documents"); // "str" is set
+			// String path = uri.getEncodedPath();
 			// showToast(uri.getPath(), Toast.LENGTH_LONG);
 
-			new FetchDocRequest(path).PerformTask(this);
+			new FetchDocRequest(uri.getEncodedPath()).PerformTask(this);
 		}
 
 	}
@@ -73,8 +71,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	public void postRequestExecute() {
 		// TODO Auto-generated method stub
 
-		showToast(ObjectHolder.getDocObj().getPages()[0].getPageImage_url(),
-				Toast.LENGTH_LONG);
+		// showToast(ObjectHolder.getDocObj().getPages()[0].getPageImage_url(),
+		// Toast.LENGTH_LONG);
 
 		Pages[] documentItem = ObjectHolder.getDocObj().getPages();
 
@@ -133,7 +131,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		File directory = cw.getDir("GetSignature", Context.MODE_PRIVATE);
 
 		Zainu.getFileIO().prepareDirectory(tempDir);
-		uniqueId = DateTime.getTodaysDate() + "_" + DateTime.getCurrentTime()
+		uniqueId = Zainu.getDateTime().getTodaysDate() + "_" + Zainu.getDateTime().getCurrentTime()
 				+ "_" + Math.random();
 		current = uniqueId + ".png";
 		mypath = new File(directory, current);

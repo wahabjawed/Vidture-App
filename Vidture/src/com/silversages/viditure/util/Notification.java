@@ -14,7 +14,7 @@ import com.silversages.viditure.activity.Dashboard;
 
 public class Notification {
 
-	public static void NewMessageNotification(String message, String title) {
+	public  void NewMessageNotification(String message, String title) {
 		// Creates an explicit intent for an Activity in your app
 		Intent resultIntent = new Intent(ViditureApp.context, Dashboard.class);
 

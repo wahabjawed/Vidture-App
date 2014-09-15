@@ -6,7 +6,7 @@ import android.util.Log;
 
 public class DateTime {
 
-	public static String getTodaysDate() {
+	public  String getTodaysDate() {
 
 		final Calendar c = Calendar.getInstance();
 		int todaysDate = (c.get(Calendar.YEAR) * 10000)
@@ -17,7 +17,7 @@ public class DateTime {
 
 	}
 
-	public static String getCurrentTime() {
+	public  String getCurrentTime() {
 
 		final Calendar c = Calendar.getInstance();
 		int currentTime = (c.get(Calendar.HOUR_OF_DAY) * 10000)

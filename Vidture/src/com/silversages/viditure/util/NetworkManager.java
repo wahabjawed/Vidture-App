@@ -3,8 +3,6 @@ package com.silversages.viditure.util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 
 import com.silversages.viditure.ViditureApp;
 
@@ -17,9 +15,8 @@ public class NetworkManager {
 	static NetworkInfo mWifi;
 	static Context context = ViditureApp.getContext();
 	static NetworkInfo activeNetworkInfo;
-	static WifiManager mainWifi;
 
-	public static void Setup() {
+	public  void Setup() {
 		connManager = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		mobile = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
@@ -27,7 +24,7 @@ public class NetworkManager {
 		activeNetworkInfo = connManager.getActiveNetworkInfo();
 	}
 
-	public static boolean IsConnected() {
+	public  boolean IsConnected() {
 		// boolean isConnect = false;
 		Setup();
 		if ((mWifi.isConnected() || mobile.isConnected())
@@ -35,19 +32,6 @@ public class NetworkManager {
 			return true;
 		}
 		return false;
-	}
-
-	public static void isOnWifi(String ID) {
-		Setup();
-		if (mWifi.isConnected() && activeNetworkInfo != null) {
-			final WifiManager wifiManager = (WifiManager) context
-					.getSystemService(Context.WIFI_SERVICE);
-			final WifiInfo _WifiInfo = wifiManager.getConnectionInfo();
-			if (_WifiInfo != null) {
-				_WifiInfo.getBSSID();
-			}
-		}
-
 	}
 
 }
