@@ -27,6 +27,7 @@ import com.silversages.viditure.abstracts.ViditureNetworkActivity;
 import com.silversages.viditure.adapter.DocumentAdapter;
 import com.silversages.viditure.objects.DocumentObject;
 import com.silversages.viditure.objects.ObjectHolder;
+import com.silversages.viditure.objects.fetchDocument.Pages;
 import com.silversages.viditure.util.DateTime;
 import com.silversages.viditure.util.FileIO;
 import com.silversages.viditure.util.Signature;
@@ -77,7 +78,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		showToast(ObjectHolder.getDocObj().getPages()[0].getPageImage_url(),
 				Toast.LENGTH_LONG);
 
-		DocumentObject[] documentItem = ObjectHolder.getDocumentImageObject();
+		Pages[] documentItem = ObjectHolder.getDocObj().getPages();
 
 		adapter = new DocumentAdapter(this, documentItem);
 		docuemnt.setAdapter(adapter);
