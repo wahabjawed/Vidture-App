@@ -3,11 +3,10 @@ package com.silversages.viditure.util;
 import java.io.File;
 
 import android.util.Log;
-import android.widget.Toast;
 
 public class FileIO {
 
-	private static boolean makedirs(String tempDir) {
+	private boolean makedirs(String tempDir) {
 		File tempdir = new File(tempDir);
 		if (!tempdir.exists())
 			tempdir.mkdirs();
@@ -23,7 +22,7 @@ public class FileIO {
 		return (tempdir.isDirectory());
 	}
 
-	public static boolean prepareDirectory(String tempDir) {
+	public boolean prepareDirectory(String tempDir) {
 		try {
 			if (makedirs(tempDir)) {
 				return true;

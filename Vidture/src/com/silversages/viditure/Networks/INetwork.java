@@ -1,4 +1,4 @@
-package com.silversages.viditure.Network;
+package com.silversages.viditure.Networks;
 
 public interface INetwork {
 	public abstract void postRequestExecute();

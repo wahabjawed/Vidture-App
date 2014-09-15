@@ -22,14 +22,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.silversages.viditure.R;
-import com.silversages.viditure.Network.Request.FetchDocRequest;
+import com.silversages.viditure.Networks.request.FetchDocRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
 import com.silversages.viditure.adapter.DocumentAdapter;
-import com.silversages.viditure.objects.DocumentObject;
 import com.silversages.viditure.objects.ObjectHolder;
 import com.silversages.viditure.objects.fetchDocument.Pages;
 import com.silversages.viditure.util.DateTime;
-import com.silversages.viditure.util.FileIO;
 import com.silversages.viditure.util.Signature;
 
 public class DocumentViewer extends ViditureNetworkActivity {
@@ -134,7 +132,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		ContextWrapper cw = new ContextWrapper(getApplicationContext());
 		File directory = cw.getDir("GetSignature", Context.MODE_PRIVATE);
 
-		FileIO.prepareDirectory(tempDir);
+		Zainu.getFileIO().prepareDirectory(tempDir);
 		uniqueId = DateTime.getTodaysDate() + "_" + DateTime.getCurrentTime()
 				+ "_" + Math.random();
 		current = uniqueId + ".png";

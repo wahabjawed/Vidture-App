@@ -82,7 +82,7 @@ public class ReadSentence extends ViditureActivity implements
 		// TODO Auto-generated method stub
 		Camera c = null;
 		try {
-			c = Camera.open(CameraUtil.getFrontCameraId());
+			c = Camera.open(Zainu.getCameraUtil().getFrontCameraId());
 			c.setDisplayOrientation(90);
 			Camera.CameraInfo info = new Camera.CameraInfo();
 			Camera.getCameraInfo(CameraUtil.getFrontCameraId(), info);

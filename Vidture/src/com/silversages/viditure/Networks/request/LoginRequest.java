@@ -1,4 +1,4 @@
-package com.silversages.viditure.Network.Request;
+package com.silversages.viditure.Networks.request;
 
 import java.util.ArrayList;
 
@@ -16,15 +16,15 @@ import com.silversages.viditure.abstracts.ViditureNetworkActivity;
 import com.silversages.viditure.util.JSONParser;
 import com.silversages.viditure.util.SQLHelper;
 
-public class RegisterRequest implements IRequestHandler {
+public class LoginRequest implements IRequestHandler {
 
-	String name;
+	
 	String password;
 	String email;
 	ViditureNetworkActivity activity;
 
-	public RegisterRequest(String name, String email, String password) {
-
+	public LoginRequest(String email, String password) {
+		
 		this.password = password;
 		this.email = email;
 	}
@@ -43,13 +43,14 @@ public class RegisterRequest implements IRequestHandler {
 					int success = json_data.getInt("success");
 					if (success == 1) {
 						int ID = json_data.getInt("ID");
+						String name=json_data.getString("name");
 						SQLHelper.registerUser(ID, name, email, password);
 						activity.postRequestExecute();
 					} else {
 						String text = json_data.getString("message");
 						activity.showToast(text, Toast.LENGTH_LONG);
 					}
-
+					
 				}
 			} catch (ParseException e1) {
 				e1.printStackTrace();
@@ -63,16 +64,16 @@ public class RegisterRequest implements IRequestHandler {
 		@Override
 		protected JSONObject doInBackground(Void... arg0) {
 			// TODO Auto-generated method stub
-			Log.d("Vidture", "Start Register");
+			Log.d("Vidture", "Start Login");
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			nameValuePairs.add(new BasicNameValuePair("password", password));
 			nameValuePairs.add(new BasicNameValuePair("email", email));
-			nameValuePairs.add(new BasicNameValuePair("name", name));
 
 			JSONParser sendData = new JSONParser();
-			JSONObject result = sendData.makeHttpRequest(networkAddress
-					+ "register.php", "POST", nameValuePairs);
-			Log.d("Vidture", "finish sending register info");
+			JSONObject result = sendData.makeHttpRequest(
+					networkAddress+"login.php",
+					"POST", nameValuePairs);
+			Log.d("Vidture", "finish sending login info");
 
 			return result;
 
