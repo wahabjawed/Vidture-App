@@ -52,7 +52,7 @@ public class TestCamera extends ViditureActivity implements
 		getWindow().setFormat(PixelFormat.UNKNOWN);
 		surafceView = (SurfaceView) findViewById(R.id.surfaceView1);
 
-		if (CameraUtil.getFrontCameraId() == -1) {
+		if (Zainu.getCameraUtil().getFrontCameraId() == -1) {
 
 			cameraStatus.setText("Camera Not Working");
 		} else {
@@ -60,7 +60,7 @@ public class TestCamera extends ViditureActivity implements
 
 			vidtureIt.setEnabled(true);
 
-			cameraIndex = CameraUtil.getFrontCameraId();
+			cameraIndex = Zainu.getCameraUtil().getFrontCameraId();
 
 			surfaceHolder = surafceView.getHolder();
 			// surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);

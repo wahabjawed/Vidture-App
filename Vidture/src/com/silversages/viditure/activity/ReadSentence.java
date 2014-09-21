@@ -3,7 +3,7 @@ package com.silversages.viditure.activity;
 import java.io.File;
 import java.io.IOException;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
@@ -16,18 +16,15 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
-
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
-import com.silversages.viditure.util.CameraUtil;
 
+@SuppressLint("SdCardPath")
 public class ReadSentence extends ViditureActivity implements
 		SurfaceHolder.Callback {
 
 	SurfaceView surafceView;
-	// private MyCameraSurfaceView myCameraSurfaceView;
 	SurfaceHolder surfaceHolder;
 	File video;
 	Camera myCamera;
@@ -47,6 +44,7 @@ public class ReadSentence extends ViditureActivity implements
 		setupListner();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -85,7 +83,7 @@ public class ReadSentence extends ViditureActivity implements
 			c = Camera.open(Zainu.getCameraUtil().getFrontCameraId());
 			c.setDisplayOrientation(90);
 			Camera.CameraInfo info = new Camera.CameraInfo();
-			Camera.getCameraInfo(CameraUtil.getFrontCameraId(), info);
+			Camera.getCameraInfo(Zainu.getCameraUtil().getFrontCameraId(), info);
 
 			Camera.Parameters params = c.getParameters();
 			params.setRotation(90);

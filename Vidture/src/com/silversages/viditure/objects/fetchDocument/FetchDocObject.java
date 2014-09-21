@@ -1,8 +1,5 @@
 package com.silversages.viditure.objects.fetchDocument;
 
-import android.util.Log;
-
-import com.silversages.viditure.objects.DocumentObject;
 
 public class FetchDocObject {
 

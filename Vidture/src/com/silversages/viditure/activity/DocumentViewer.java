@@ -108,6 +108,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void setupListner() {
 		// TODO Auto-generated method stub

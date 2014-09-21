@@ -8,7 +8,7 @@ import android.hardware.Camera.Size;
 
 public class CameraUtil {
 
-	public static int getFrontCameraId() {
+	public int getFrontCameraId() {
 		CameraInfo ci = new CameraInfo();
 		for (int i = 0; i < Camera.getNumberOfCameras(); i++) {
 			Camera.getCameraInfo(i, ci);
@@ -18,11 +18,11 @@ public class CameraUtil {
 		return -1; // No front-facing camera found
 	}
 
-	public static void openFrontCamera() {
+	public void openFrontCamera() {
 		int index = getFrontCameraId();
 		if (index == -1)
 			return;
-		Camera c = Camera.open(index);
+		Camera.open(index);
 		
 	}
 	

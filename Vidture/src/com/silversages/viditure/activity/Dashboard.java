@@ -85,6 +85,7 @@ public class Dashboard extends ViditureNetworkActivity {
 		
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void preRequestExecute() {
 		// TODO Auto-generated method stub

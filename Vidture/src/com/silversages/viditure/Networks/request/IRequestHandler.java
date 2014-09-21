@@ -1,11 +1,8 @@
 package com.silversages.viditure.Networks.request;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-
 import com.silversages.viditure.ViditureApp;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
-import com.silversages.viditure.util.SQLHelper;
 
 public interface IRequestHandler {
 
