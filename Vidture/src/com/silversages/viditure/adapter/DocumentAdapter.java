@@ -12,12 +12,11 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import com.koushikdutta.ion.Ion;
 import com.silversages.viditure.R;
-import com.silversages.viditure.objects.DocumentObject;
 import com.silversages.viditure.objects.fetchDocument.Pages;
+import com.silversages.viditure.util.TouchImageView;
 
 public class DocumentAdapter extends ArrayAdapter<Pages> {
 
@@ -32,7 +31,7 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 
 	static class ViewHolder {
 
-		public ImageView documentPic;
+		public TouchImageView documentPic;
 
 	}
 
@@ -50,12 +49,13 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 
 			ViewHolder viewHolder = new ViewHolder();
 			FrameLayout layout = (FrameLayout) vi.findViewById(R.id.docLay);
-			viewHolder.documentPic = (ImageView) vi.findViewById(R.id.docImg);
+			viewHolder.documentPic = (TouchImageView) vi.findViewById(R.id.docImg);
 			vi.setTag(viewHolder);
 			if (obj.getFields().length > 0) {
 				Display display = ((WindowManager) activity
 						.getApplicationContext().getSystemService(
 								Context.WINDOW_SERVICE)).getDefaultDisplay();
+				@SuppressWarnings("deprecation")
 				int width = display.getWidth() / 3;
 				EditText text = new EditText(activity);
 				LayoutParams lp = new LayoutParams(width,
@@ -72,7 +72,6 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 
 			// Bitmap bmp = BitmapFactory.decodeByteArray(obj.getImg(), 0,
 			// obj.getImg().length);
-			// holder.documentPic.setImageBitmap(bmp);
 
 		} else {
 

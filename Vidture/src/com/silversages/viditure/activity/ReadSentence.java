@@ -16,9 +16,11 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
+import com.silversages.viditure.objects.ObjectHolder;
 
 @SuppressLint("SdCardPath")
 public class ReadSentence extends ViditureActivity implements
@@ -33,6 +35,7 @@ public class ReadSentence extends ViditureActivity implements
 	Button vidtureIt;
 	MediaRecorder mediaRecorder = new MediaRecorder();
 	boolean recording = false;
+	TextView message;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class ReadSentence extends ViditureActivity implements
 
 		getWindow().setFormat(PixelFormat.UNKNOWN);
 		surafceView = (SurfaceView) findViewById(R.id.surfaceView1);
+		message = (TextView) findViewById(R.id.message);
+		message.setText((ObjectHolder.getDocObj().getMe()).getReadOutMessage());
 
 	}
 
@@ -150,8 +155,9 @@ public class ReadSentence extends ViditureActivity implements
 				.get(CamcorderProfile.QUALITY_HIGH));
 
 		mediaRecorder.setOutputFile("/sdcard/myvideo.mp4");
-		mediaRecorder.setMaxDuration(60000); // Set max duration 60 sec.
-		mediaRecorder.setMaxFileSize(5000000); // Set max file size 5M
+		mediaRecorder.setMaxDuration(ObjectHolder.getDocObj().getMe()
+				.getVideoDuration() * 1000); // Set max duration 60 sec.
+		// mediaRecorder.setMaxFileSize(5000000); // Set max file size 5M
 		mediaRecorder.setOrientationHint(270);
 		mediaRecorder.setPreviewDisplay(surafceView.getHolder().getSurface());
 
