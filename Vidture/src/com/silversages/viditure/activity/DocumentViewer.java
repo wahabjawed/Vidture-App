@@ -61,7 +61,6 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			// String var = uri.getQueryParameter("documents"); // "str" is set
 			// String path = uri.getEncodedPath();
 			// showToast(uri.getPath(), Toast.LENGTH_LONG);
-
 			new FetchDocRequest(uri.getEncodedPath()).PerformTask(this);
 		}
 

@@ -11,6 +11,7 @@ import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -95,7 +96,9 @@ public class ReadSentence extends ViditureActivity implements
 			c.setParameters(params);
 
 		} catch (Exception e) {
+
 			// Camera is not available (in use or does not exist)
+			Log.d("Viditure", e.getMessage());
 		}
 		return c; // returns null if camera is unavailable
 	}

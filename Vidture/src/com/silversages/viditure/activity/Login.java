@@ -27,7 +27,7 @@ public class Login extends ViditureNetworkActivity {
 		setContentView(R.layout.login);
 		setupView();
 		setupListner();
-		
+
 	}
 
 	@Override
@@ -58,15 +58,15 @@ public class Login extends ViditureNetworkActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				if(Zainu.getNetworkManager().IsConnected()){
-				
-					new LoginRequest(email.getText().toString(), password.getText()
-						.toString()).PerformTask(Login.this);
-				}else{
-					
+
+				if (Zainu.getNetworkManager().IsConnected()) {
+
+					new LoginRequest(email.getText().toString(), password
+							.getText().toString()).PerformTask(Login.this);
+				} else {
+
 					showToast("Couldn't connect to internet", Toast.LENGTH_LONG);
-					
+
 				}
 			}
 		});
@@ -81,9 +81,9 @@ public class Login extends ViditureNetworkActivity {
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putBoolean("first_time", true);
 		editor.commit();
-		startActivity(new Intent(Login.this,Dashboard.class));
+		startActivity(new Intent(Login.this, Dashboard.class));
 		this.finish();
-		
+
 	}
 
 	@Override

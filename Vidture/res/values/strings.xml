@@ -5,5 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <color name="actionbar">#00ccff</color>
+    <string name="camera_working">Camera Working</string>
+    <string name="camera_notworking">Camera Not Working</string>
 
 </resources>

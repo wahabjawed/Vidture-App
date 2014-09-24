@@ -9,6 +9,7 @@ import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -54,9 +55,9 @@ public class TestCamera extends ViditureActivity implements
 
 		if (Zainu.getCameraUtil().getFrontCameraId() == -1) {
 
-			cameraStatus.setText("Camera Not Working");
+			cameraStatus.setText(getString(R.string.camera_notworking));
 		} else {
-			cameraStatus.setText("Camera Works");
+			cameraStatus.setText(getString(R.string.camera_working));
 
 			vidtureIt.setEnabled(true);
 
@@ -80,7 +81,7 @@ public class TestCamera extends ViditureActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+
 				startActivity(new Intent(TestCamera.this, ReadSentence.class));
 			}
 		});
@@ -96,7 +97,6 @@ public class TestCamera extends ViditureActivity implements
 		previewing = false;
 		super.onPause();
 
-	
 	}
 
 	@Override
@@ -107,6 +107,7 @@ public class TestCamera extends ViditureActivity implements
 		try {
 			camera.setPreviewDisplay(holder);
 		} catch (IOException exception) {
+			Log.d("Viditure", exception.getMessage());
 			camera.release();
 			camera = null;
 		}
@@ -139,7 +140,7 @@ public class TestCamera extends ViditureActivity implements
 				camera.startPreview();
 				previewing = true;
 			} catch (IOException e) {
-				e.printStackTrace();
+				Log.d("Viditure", e.getMessage());
 			}
 		}
 	}

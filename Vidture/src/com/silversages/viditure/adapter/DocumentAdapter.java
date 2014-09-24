@@ -49,7 +49,8 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 
 			ViewHolder viewHolder = new ViewHolder();
 			FrameLayout layout = (FrameLayout) vi.findViewById(R.id.docLay);
-			viewHolder.documentPic = (TouchImageView) vi.findViewById(R.id.docImg);
+			viewHolder.documentPic = (TouchImageView) vi
+					.findViewById(R.id.docImg);
 			vi.setTag(viewHolder);
 			if (obj.getFields().length > 0) {
 				Display display = ((WindowManager) activity
@@ -69,9 +70,6 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 
 			Ion.with(holder.documentPic).placeholder(R.drawable.image)
 					.load(obj.getPageImage_url());
-
-			// Bitmap bmp = BitmapFactory.decodeByteArray(obj.getImg(), 0,
-			// obj.getImg().length);
 
 		} else {
 
