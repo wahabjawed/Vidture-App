@@ -11,6 +11,7 @@ import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -157,7 +158,16 @@ public class ReadSentence extends ViditureActivity implements
 		mediaRecorder.setProfile(CamcorderProfile
 				.get(CamcorderProfile.QUALITY_HIGH));
 
-		mediaRecorder.setOutputFile("/sdcard/myvideo.mp4");
+		String state = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED.equals(state))
+			mediaRecorder.setOutputFile(Environment
+					.getExternalStorageDirectory().getAbsolutePath()
+					+ "/myvideo.mp4");
+
+		else
+			mediaRecorder.setOutputFile(getFilesDir().getAbsolutePath()
+					+ "/video.mp4");
+
 		mediaRecorder.setMaxDuration(ObjectHolder.getDocObj().getMe()
 				.getVideoDuration() * 1000); // Set max duration 60 sec.
 		// mediaRecorder.setMaxFileSize(5000000); // Set max file size 5M
@@ -212,6 +222,7 @@ public class ReadSentence extends ViditureActivity implements
 			myCamera.setPreviewDisplay(holder);
 			myCamera.startPreview();
 		} catch (IOException e) {
+			Log.d("Vidture", e.getMessage());
 		}
 
 	}
@@ -231,6 +242,7 @@ public class ReadSentence extends ViditureActivity implements
 			myCamera.stopPreview();
 		} catch (Exception e) {
 			// ignore: tried to stop a non-existent preview
+			Log.d("Vidture", e.getMessage());
 		}
 
 		// make any resize, rotate or reformatting changes here
@@ -241,6 +253,7 @@ public class ReadSentence extends ViditureActivity implements
 			myCamera.startPreview();
 
 		} catch (Exception e) {
+			Log.d("Vidture", e.getMessage());
 		}
 
 	}

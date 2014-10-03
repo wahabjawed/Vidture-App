@@ -1,6 +1,5 @@
 package com.silversages.viditure.objects.fetchDocument;
 
-
 public class FetchDocObject {
 
 	String timeUpdated;
@@ -20,8 +19,6 @@ public class FetchDocObject {
 	String[] allRecipients;
 	meProfile me;
 	Pages[] pages;
-
-	
 
 	public Pages[] getPages() {
 		return pages;
@@ -159,8 +156,6 @@ public class FetchDocObject {
 		this.filename = filename;
 	}
 
-
-	
 	public class meProfile {
 
 		String fullName;

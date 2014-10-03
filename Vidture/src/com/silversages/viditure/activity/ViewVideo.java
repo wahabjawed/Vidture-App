@@ -2,6 +2,7 @@ package com.silversages.viditure.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,7 +37,13 @@ public class ViewVideo extends ViditureActivity {
 		recordNew = (Button) findViewById(R.id.recordNew);
 
 		video = (VideoView) findViewById(R.id.videoView1);
-		video.setVideoPath("/sdcard/myvideo.mp4");
+
+		String state = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED.equals(state)) {
+			video.setVideoPath(Environment.getExternalStorageDirectory().getAbsolutePath()+"/myvideo.mp4");
+		} else {
+			video.setVideoPath(getFilesDir().getAbsolutePath() + "/video.mp4");
+		}
 		MediaController mediaController = new MediaController(this);
 		mediaController.setAnchorView(video);
 		video.setMediaController(mediaController);

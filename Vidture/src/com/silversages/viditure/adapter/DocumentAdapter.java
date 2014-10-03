@@ -74,7 +74,6 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 		} else {
 
 		}
-
 		return vi;
 	}
 
