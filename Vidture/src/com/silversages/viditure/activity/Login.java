@@ -31,7 +31,7 @@ public class Login extends ViditureNetworkActivity {
 	}
 
 	@Override
-	protected void setupView() {
+	public void setupView() {
 		// TODO Auto-generated method stub
 
 		email = (EditText) findViewById(R.id.email);
@@ -42,7 +42,7 @@ public class Login extends ViditureNetworkActivity {
 	}
 
 	@Override
-	protected void setupListner() {
+	public void setupListner() {
 		// TODO Auto-generated method stub
 		register.setOnClickListener(new OnClickListener() {
 

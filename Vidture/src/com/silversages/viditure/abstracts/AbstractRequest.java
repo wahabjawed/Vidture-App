@@ -1,19 +1,19 @@
 package com.silversages.viditure.abstracts;
 
-import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
 
+import com.silversages.viditure.ViditureApp;
 import com.silversages.viditure.util.SQLHelper;
 import com.silversages.viditure.zainu.ZainuObj;
 
-public abstract class AbstractActivity extends ActionBarActivity {
+public class AbstractRequest {
 
 	protected SQLHelper db;
 	protected ZainuObj Zainu = ZainuObj.getInstance();
 
 	public void showToast(String text, int duration) {
 
-		Toast.makeText(this, text, duration).show();
+		Toast.makeText(ViditureApp.getContext(), text, duration).show();
 
 	}
 }

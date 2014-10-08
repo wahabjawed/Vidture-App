@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.silversages.viditure.Networks.INetwork;
 
 public abstract class ViditureNetworkActivity extends AbstractActivity
-		implements INetwork {
+		implements INetwork,IActivityCallBack {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

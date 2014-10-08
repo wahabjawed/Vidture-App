@@ -93,7 +93,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	}
 
 	@Override
-	protected void setupView() {
+	public void setupView() {
 		// TODO Auto-generated method stub
 
 		docuemnt = (ListView) findViewById(R.id.document);
@@ -109,7 +109,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void setupListner() {
+	public void setupListner() {
 		// TODO Auto-generated method stub
 
 		dialog_camera.setContentView(R.layout.dialog_picture);

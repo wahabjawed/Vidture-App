@@ -52,7 +52,6 @@
 
                 <data
                     android:host="54.183.77.229"
-                    android:port="8080"
                     android:scheme="http" />
             </intent-filter>
         </activity>

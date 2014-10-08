@@ -175,8 +175,18 @@ public class FetchDocObject {
 		String signerVideo_url;
 		String signerInput_url;
 		boolean signer;
+		String token;
 		FieldInputs[] fieldInputs;
+		
+		public String getToken() {
+			return token;
+		}
 
+		public void setToken(String token) {
+			this.token = token;
+		}
+
+	
 		public FieldInputs[] getFieldInputs() {
 			return fieldInputs;
 		}

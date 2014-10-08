@@ -26,6 +26,7 @@ public class JSONParser {
 	static InputStream is = null;
 	static JSONObject jObj = null;
 	static String json = "";
+	public HttpResponse httpResponse;
 
 	// constructor
 	public JSONParser() {
@@ -48,7 +49,7 @@ public class JSONParser {
 				HttpPost httpPost = new HttpPost(url);
 				httpPost.setEntity(new UrlEncodedFormEntity(params));
 
-				HttpResponse httpResponse = httpClient.execute(httpPost);
+				httpResponse = httpClient.execute(httpPost);
 				HttpEntity httpEntity = httpResponse.getEntity();
 				is = httpEntity.getContent();
 
@@ -59,8 +60,12 @@ public class JSONParser {
 				url += "?" + paramString;
 				HttpGet httpGet = new HttpGet(url);
 
-				HttpResponse httpResponse = httpClient.execute(httpGet);
+				httpResponse = httpClient.execute(httpGet);
 				HttpEntity httpEntity = httpResponse.getEntity();
+				Log.e("Viditure",
+						""
+								+ httpResponse.getFirstHeader("X-Auth-Token")
+										.getValue());
 				is = httpEntity.getContent();
 			}
 

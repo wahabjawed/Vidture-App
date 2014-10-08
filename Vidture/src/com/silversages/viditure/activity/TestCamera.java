@@ -43,7 +43,7 @@ public class TestCamera extends ViditureActivity implements
 	}
 
 	@Override
-	protected void setupView() {
+	public void setupView() {
 		// TODO Auto-generated method stub
 
 		cameraStatus = (TextView) findViewById(R.id.cameraStatus);
@@ -73,7 +73,7 @@ public class TestCamera extends ViditureActivity implements
 	}
 
 	@Override
-	protected void setupListner() {
+	public void setupListner() {
 		// TODO Auto-generated method stub
 
 		vidtureIt.setOnClickListener(new OnClickListener() {

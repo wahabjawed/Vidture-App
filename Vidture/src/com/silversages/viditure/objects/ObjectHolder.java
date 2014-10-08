@@ -10,6 +10,16 @@ public class ObjectHolder {
 	private static SignatureDObject signatureDObj;
 	private static AcceptDObject acceptDObj;
 	private static CameraDObject cameraDObj;
+	private static AuthXObject authXObject;
+
+		
+	public static AuthXObject getAuthXObject() {
+		return authXObject;
+	}
+
+	public static void setAuthXObject(AuthXObject authXObject) {
+		ObjectHolder.authXObject = authXObject;
+	}
 
 	public static SignatureDObject getSignatureDObj() {
 		return signatureDObj;

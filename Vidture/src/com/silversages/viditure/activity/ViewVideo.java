@@ -29,7 +29,7 @@ public class ViewVideo extends ViditureActivity {
 	}
 
 	@Override
-	protected void setupView() {
+	public void setupView() {
 		// TODO Auto-generated method stub
 
 		useThis = (Button) findViewById(R.id.useThis);
@@ -52,7 +52,7 @@ public class ViewVideo extends ViditureActivity {
 	}
 
 	@Override
-	protected void setupListner() {
+	public void setupListner() {
 		// TODO Auto-generated method stub
 
 		recordNew.setOnClickListener(new OnClickListener() {

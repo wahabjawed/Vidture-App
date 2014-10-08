@@ -10,12 +10,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.silversages.viditure.abstracts.AbstractRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
+import com.silversages.viditure.objects.AuthXObject;
 import com.silversages.viditure.objects.ObjectHolder;
 import com.silversages.viditure.objects.fetchDocument.FetchDocObject;
 import com.silversages.viditure.util.JSONParser;
 
-public class FetchDocRequest implements IRequestHandler {
+public class FetchDocRequest extends AbstractRequest implements IRequestHandler {
 
 	String URL;
 	ViditureNetworkActivity activity;
@@ -27,6 +29,7 @@ public class FetchDocRequest implements IRequestHandler {
 	}
 
 	class Task extends AsyncTask<Void, Void, JSONObject> {
+		JSONParser sendData;
 
 		@Override
 		protected void onPreExecute() {
@@ -45,7 +48,8 @@ public class FetchDocRequest implements IRequestHandler {
 		protected void onPostExecute(JSONObject result) {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
-
+			ObjectHolder.setAuthXObject(new AuthXObject(sendData.httpResponse
+					.getFirstHeader("X-Auth-Token").getValue()));
 			try {
 				if (result != null) {
 					Gson gson = new Gson();
@@ -68,7 +72,7 @@ public class FetchDocRequest implements IRequestHandler {
 			// TODO Auto-generated method stub
 			Log.d("Vidture", "Start Register");
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			JSONParser sendData = new JSONParser();
+			sendData = new JSONParser();
 			JSONObject result = sendData.makeHttpRequest(networkAddress + URL,
 					"GET", nameValuePairs);
 			Log.d("Vidture", "URL: " + networkAddress + URL);

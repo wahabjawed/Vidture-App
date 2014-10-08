@@ -18,13 +18,13 @@ public class DocumentName extends ViditureActivity {
 	}
 
 	@Override
-	protected void setupView() {
+	public void setupView() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	protected void setupListner() {
+	public void setupListner() {
 		// TODO Auto-generated method stub
 
 	}

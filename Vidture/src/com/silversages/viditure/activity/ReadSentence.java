@@ -69,7 +69,7 @@ public class ReadSentence extends ViditureActivity implements
 	}
 
 	@Override
-	protected void setupView() {
+	public void setupView() {
 		// TODO Auto-generated method stub
 
 		vidtureIt = (Button) findViewById(R.id.vitureIt);
@@ -105,7 +105,7 @@ public class ReadSentence extends ViditureActivity implements
 	}
 
 	@Override
-	protected void setupListner() {
+	public void setupListner() {
 		// TODO Auto-generated method stub
 
 		vidtureIt.setOnClickListener(new OnClickListener() {

@@ -2,7 +2,7 @@ package com.silversages.viditure.abstracts;
 
 import android.os.Bundle;
 
-public abstract class ViditureActivity extends AbstractActivity {
+public abstract class ViditureActivity extends AbstractActivity implements IActivityCallBack{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

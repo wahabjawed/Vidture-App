@@ -67,14 +67,14 @@ public class Dashboard extends ViditureNetworkActivity {
 	}
 
 	@Override
-	protected void setupView() {
+	public void setupView() {
 		// TODO Auto-generated method stub
 		List = (ListView) findViewById(R.id.dListView);
 		ProText = (TextView) findViewById(R.id.mProText);
 	}
 
 	@Override
-	protected void setupListner() {
+	public void setupListner() {
 		// TODO Auto-generated method stub
 
 	}

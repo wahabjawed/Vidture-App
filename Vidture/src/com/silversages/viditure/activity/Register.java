@@ -31,7 +31,7 @@ public class Register extends ViditureNetworkActivity {
 	}
 
 	@Override
-	protected void setupView() {
+	public void setupView() {
 		// TODO Auto-generated method stub
 
 		name = (EditText) findViewById(R.id.name);
@@ -42,7 +42,7 @@ public class Register extends ViditureNetworkActivity {
 	}
 
 	@Override
-	protected void setupListner() {
+	public void setupListner() {
 		// TODO Auto-generated method stub
 
 		cancel.setOnClickListener(new OnClickListener() {
