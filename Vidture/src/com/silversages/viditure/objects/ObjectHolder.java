@@ -2,7 +2,9 @@ package com.silversages.viditure.objects;
 
 import android.util.Log;
 
+import com.silversages.viditure.objects.dialog.*;
 import com.silversages.viditure.objects.fetchDocument.FetchDocObject;
+import com.silversages.viditure.objects.sendSignerData.SignerObject;
 
 public class ObjectHolder {
 
@@ -11,8 +13,16 @@ public class ObjectHolder {
 	private static AcceptDObject acceptDObj;
 	private static CameraDObject cameraDObj;
 	private static AuthXObject authXObject;
+	private static SignerObject signerObject;
 
-		
+	public static SignerObject getSignerObject() {
+		return signerObject;
+	}
+
+	public static void setSignerObject(SignerObject signerObject) {
+		ObjectHolder.signerObject = signerObject;
+	}
+
 	public static AuthXObject getAuthXObject() {
 		return authXObject;
 	}

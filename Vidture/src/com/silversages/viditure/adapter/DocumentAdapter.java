@@ -1,5 +1,10 @@
 package com.silversages.viditure.adapter;
 
+import java.util.ArrayList;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -15,6 +20,8 @@ import android.widget.FrameLayout;
 
 import com.koushikdutta.ion.Ion;
 import com.silversages.viditure.R;
+import com.silversages.viditure.ViditureApp;
+import com.silversages.viditure.objects.ObjectHolder;
 import com.silversages.viditure.objects.fetchDocument.Pages;
 import com.silversages.viditure.util.TouchImageView;
 
@@ -67,9 +74,19 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 		ViewHolder holder = (ViewHolder) vi.getTag();
 
 		if (obj.getPageImage_url() != null) {
-
-			Ion.with(holder.documentPic).placeholder(R.drawable.image)
-					.load(obj.getPageImage_url());
+			Log.e("Vid", obj.getPageImage_url());
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("X-Auth-Token",
+					ObjectHolder.getAuthXObject().getToken()));
+			// Ion.with(holder.documentPic).placeholder(R.drawable.image)
+			// .load(obj.getPageImage_url(), nameValuePairs);
+			Ion.with(ViditureApp.getContext())
+					.load(obj.getPageImage_url())
+					.setHeader("X-Auth-Token",
+							ObjectHolder.getAuthXObject().getToken())
+					.setLogging("Viditure", Log.ERROR).withBitmap()
+					.placeholder(R.drawable.image)
+					.intoImageView(holder.documentPic);
 
 		} else {
 
