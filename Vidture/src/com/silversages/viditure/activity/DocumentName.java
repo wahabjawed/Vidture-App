@@ -43,6 +43,7 @@ public class DocumentName extends ViditureActivity {
 		// TODO Auto-generated method stub
 		sendSignature.setOnClickListener(new OnClickListener() {
 
+			@SuppressWarnings("deprecation")
 			@Override
 			public void onClick(View v) {
 

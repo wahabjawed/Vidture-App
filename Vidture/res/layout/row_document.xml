@@ -8,12 +8,11 @@
     android:paddingLeft="6dp"
     android:paddingRight="6dp" >
 
-
     <com.silversages.viditure.util.TouchImageView
         android:id="@+id/docImg"
-        android:contentDescription="@+string/Document"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@+string/Document"
         android:scaleType="centerInside"
         android:src="@drawable/testcamera" />
 

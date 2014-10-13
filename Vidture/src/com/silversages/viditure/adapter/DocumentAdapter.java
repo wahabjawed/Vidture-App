@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 	static class ViewHolder {
 
 		public TouchImageView documentPic;
+		public FrameLayout layout;
 
 	}
 
@@ -55,31 +57,40 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 			vi = inflater.inflate(R.layout.row_document, parent, false);
 
 			ViewHolder viewHolder = new ViewHolder();
-			FrameLayout layout = (FrameLayout) vi.findViewById(R.id.docLay);
+
 			viewHolder.documentPic = (TouchImageView) vi
 					.findViewById(R.id.docImg);
 			vi.setTag(viewHolder);
-			if (obj.getFields().length > 0) {
-				Display display = ((WindowManager) activity
-						.getApplicationContext().getSystemService(
-								Context.WINDOW_SERVICE)).getDefaultDisplay();
-				@SuppressWarnings("deprecation")
-				int width = display.getWidth() / 3;
-				EditText text = new EditText(activity);
-				LayoutParams lp = new LayoutParams(width,
-						LayoutParams.WRAP_CONTENT);
-				layout.addView(text, lp);
-			}
+
 		}
+		FrameLayout layout = (FrameLayout) vi.findViewById(R.id.docLay);
 		ViewHolder holder = (ViewHolder) vi.getTag();
 
+		if (obj.getFields().length > 0) {
+			for (int i = 0; i < obj.getFields().length; i++) {
+				Log.e("Viditure", "Dynamic Layout: "
+						+ obj.getFields()[i].getKind().getType());
+				if (obj.getFields()[i].getKind().getType().equals("TEXT")) {
+					Log.e("Viditure", "Dynamic Layout");
+
+					EditText text = new EditText(activity);
+					text.setHint(obj.getFields()[i].getKind().getName());
+					FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+							obj.getFields()[i].getScreenPos().getWidth() + 100,
+							obj.getFields()[i].getScreenPos().getHeight() + 50,
+							Gravity.TOP | Gravity.LEFT);
+					lp.topMargin = obj.getFields()[i].getScreenPos().getTop();
+					lp.leftMargin = obj.getFields()[i].getScreenPos().getLeft();
+					// lp.horizontalMargin = obj.getFields()[i].getScreenPos()
+					// .getLeft() - 45;
+					// lp.verticalMargin = obj.getFields()[i].getScreenPos()
+					// .getTop() - 80;
+					layout.addView(text, lp);
+				}
+			}
+		}
 		if (obj.getPageImage_url() != null) {
 			Log.e("Vid", obj.getPageImage_url());
-			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("X-Auth-Token",
-					ObjectHolder.getAuthXObject().getToken()));
-			// Ion.with(holder.documentPic).placeholder(R.drawable.image)
-			// .load(obj.getPageImage_url(), nameValuePairs);
 			Ion.with(ViditureApp.getContext())
 					.load(obj.getPageImage_url())
 					.setHeader("X-Auth-Token",

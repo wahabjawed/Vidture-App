@@ -10,10 +10,10 @@ public class ObjectHolder {
 
 	private static FetchDocObject docObj;
 	private static SignatureDObject signatureDObj;
-	private static AcceptDObject acceptDObj;
-	private static CameraDObject cameraDObj;
+	private static AcceptDObject acceptDObj = new AcceptDObject();
+	private static CameraDObject cameraDObj = new CameraDObject();
 	private static AuthXObject authXObject;
-	private static SignerObject signerObject;
+	private static SignerObject signerObject = new SignerObject();
 
 	public static SignerObject getSignerObject() {
 		return signerObject;
