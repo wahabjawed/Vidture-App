@@ -65,7 +65,7 @@
         android:background="#4ba2dc"
         android:paddingLeft="20dip"
         android:paddingRight="20dip"
-        android:text="Start Vituring"
+        android:text="Start Vidituring"
         android:textColor="#fff" />
 
 </LinearLayout>

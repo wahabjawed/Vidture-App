@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:lines="2"
             android:paddingLeft="10dp"
-            android:text="agree to vidture terms and conditions"
+            android:text="agree to viditure terms and conditions"
             android:textColor="#4ba2dc"
             android:textSize="15sp" />
 
@@ -80,8 +80,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="#4ba2dc"
-        android:paddingLeft="40dip"
-        android:paddingRight="40dip"
+        android:paddingLeft="50dip"
+        android:paddingRight="50dip"
         android:text="Next"
         android:textColor="#fff" />
 
