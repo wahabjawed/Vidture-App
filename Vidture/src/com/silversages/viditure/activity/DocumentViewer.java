@@ -61,7 +61,9 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			// String var = uri.getQueryParameter("documents"); // "str" is set
 			// String path = uri.getEncodedPath();
 			// showToast(uri.getPath(), Toast.LENGTH_LONG);
-			new FetchDocRequest(uri.getEncodedPath()).PerformTask(this);
+			// new FetchDocRequest(uri.getEncodedPath()).PerformTask(this);
+			new FetchDocRequest("/vts/signrequest/54324d60e4b000f651da5597")
+					.PerformTask(this);
 		}
 
 	}
@@ -131,8 +133,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		File directory = cw.getDir("GetSignature", Context.MODE_PRIVATE);
 
 		Zainu.getFileIO().prepareDirectory(tempDir);
-		uniqueId = Zainu.getDateTime().getTodaysDate() + "_" + Zainu.getDateTime().getCurrentTime()
-				+ "_" + Math.random();
+		uniqueId = Zainu.getDateTime().getTodaysDate() + "_"
+				+ Zainu.getDateTime().getCurrentTime() + "_" + Math.random();
 		current = uniqueId + ".png";
 		mypath = new File(directory, current);
 

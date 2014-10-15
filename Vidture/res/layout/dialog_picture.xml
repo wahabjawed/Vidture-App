@@ -4,30 +4,34 @@
     android:layout_height="fill_parent"
     android:background="#fff"
     android:padding="20dip" >
-
     <LinearLayout
         android:id="@+id/checktext"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
- <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/checktext"
-        android:src="@drawable/squarecheckbox" />
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal">
+     
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/checktext"
+            android:src="@drawable/squarecheckbox"
+            android:textSize="50sp" />
 
         <TextView
             android:id="@+id/terms_text"
-            android:layout_width="199dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:lines="2"
-            android:paddingLeft="10dp"
-            android:text="agree to viditure terms and conditions"
+            android:layout_marginLeft="10dp"
+            android:text="agree to vidture terms and conditions"
             android:textColor="#4ba2dc"
             android:textSize="15sp" />
 
     </LinearLayout>
+
 
     <Button
         android:id="@+id/camera"

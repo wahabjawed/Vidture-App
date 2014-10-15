@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="20dip" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="246dp"
+        android:layout_height="163dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/testcamera" />
+
+    <TextView
+        android:id="@+id/terms_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="7dp"
+        android:text="Pls tske of photo to your ID."
+        android:textColor="#4ba2dc"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/camera"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:textColor="#fff" />
+
+</LinearLayout>
