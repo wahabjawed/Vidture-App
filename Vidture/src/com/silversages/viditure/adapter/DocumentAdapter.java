@@ -100,7 +100,6 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 					.intoImageView(holder.documentPic);
 
 		} else {
-
 		}
 		return vi;
 	}
