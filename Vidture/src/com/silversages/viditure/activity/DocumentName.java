@@ -10,13 +10,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.koushikdutta.ion.Ion;
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
 import com.silversages.viditure.objects.ObjectHolder;
 import com.silversages.viditure.objects.sendSignerData.SignerObject;
-import com.silversages.viditure.objects.sendSignerData.SignerObject.Geo;
 
 public class DocumentName extends ViditureActivity {
 
@@ -57,6 +55,8 @@ public class DocumentName extends ViditureActivity {
 						ObjectHolder.getDocObj().getMe().getSignerInput_url())
 						.setHeader("X-Auth-Toekn",
 								ObjectHolder.getAuthXObject().getToken())
+						.setMultipartParameter("json",
+								g.toJson(ObjectHolder.getSignerObject()))
 						.setMultipartFile(
 								"video",
 								new File(Environment
@@ -67,5 +67,4 @@ public class DocumentName extends ViditureActivity {
 			}
 		});
 	}
-
 }
