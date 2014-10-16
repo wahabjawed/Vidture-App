@@ -73,6 +73,7 @@ public class FetchDocRequest extends AbstractRequest implements IRequestHandler 
 			Log.d("Vidture", "Start Register");
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 			sendData = new JSONParser();
+			sendData.setHeader("X-Viditure-App", "android");
 			JSONObject result = sendData.makeHttpRequest(networkAddress + URL,
 					"GET", nameValuePairs);
 			Log.d("Vidture", "URL: " + networkAddress + URL);

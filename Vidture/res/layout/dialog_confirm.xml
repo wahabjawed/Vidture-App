@@ -23,18 +23,17 @@
         android:orientation="horizontal" >
 
         <CheckBox
-            android:id="@+id/checkBox1"
+            android:id="@+id/accept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="true"
             android:src="@drawable/squarecheckbox"
             android:text="I agree"
             android:textColor="#4ba2dc"
             android:textSize="15sp" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/decline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

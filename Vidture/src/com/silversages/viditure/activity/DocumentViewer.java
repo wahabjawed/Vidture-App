@@ -2,23 +2,35 @@ package com.silversages.viditure.activity;
 
 import java.io.File;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.silversages.viditure.R;
 import com.silversages.viditure.Networks.request.FetchDocRequest;
@@ -30,17 +42,22 @@ import com.silversages.viditure.util.Signature;
 
 public class DocumentViewer extends ViditureNetworkActivity {
 
+	private static final int CAMERA = 0;
 	ListView docuemnt;
 	Button startVituring;
 	Dialog dialog_camera;
 	Dialog dialog_agree;
 	Dialog dialog_date;
+	Dialog dialog_accept;
+	Dialog dialog_take_pic;
+	Dialog dialog_set_pic;
 	DocumentAdapter adapter;
 
 	View mView;
 	Signature mSignature;
 	LinearLayout mContent;
 	File mypath;
+	ImageView dilaog_image;
 	public static String tempDir;
 	public int count = 1;
 	public String current = null;
@@ -66,6 +83,25 @@ public class DocumentViewer extends ViditureNetworkActivity {
 					.PerformTask(this);
 		}
 
+	}
+
+	@Override
+	public void onActivityResult(int reqCode, int resultCode, Intent data) {
+		super.onActivityResult(reqCode, resultCode, data);
+
+		switch (reqCode) {
+		case (CAMERA):
+			if (resultCode == RESULT_OK) {
+				Bundle extras = data.getExtras();
+				Bitmap bmp = (Bitmap) extras.get("data");
+				dialog_take_pic.dismiss();
+				dialog_set_pic.show();
+				dilaog_image.setImageBitmap(bmp);
+
+			}
+			break;
+
+		}
 	}
 
 	@Override
@@ -103,13 +139,18 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		dialog_camera = new Dialog(DocumentViewer.this);
 		dialog_agree = new Dialog(DocumentViewer.this);
 		dialog_date = new Dialog(DocumentViewer.this);
+		dialog_accept = new Dialog(DocumentViewer.this);
+		dialog_take_pic = new Dialog(DocumentViewer.this);
+		dialog_set_pic = new Dialog(DocumentViewer.this);
 		dialog_date.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_agree.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_camera.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog_accept.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog_take_pic.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog_set_pic.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void setupListner() {
 		// TODO Auto-generated method stub
@@ -127,6 +168,45 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		dialog_agree.getWindow().setBackgroundDrawableResource(
 				R.drawable.dialogbox);
 
+		dialog_accept.setContentView(R.layout.dialog_confirm);
+		dialog_accept.getWindow().setBackgroundDrawableResource(
+				R.drawable.dialogbox);
+		dialog_accept.setCanceledOnTouchOutside(false);
+		dialog_accept.show();
+
+		dialog_take_pic.setContentView(R.layout.dialog_take_picture);
+		dialog_take_pic.getWindow().setBackgroundDrawableResource(
+				R.drawable.dialogbox);
+
+		dialog_set_pic.setContentView(R.layout.dialog_pick_picture);
+		dialog_set_pic.getWindow().setBackgroundDrawableResource(
+				R.drawable.dialogbox);
+
+		dilaog_image = (ImageView) dialog_set_pic.findViewById(R.id.imageView1);
+		Button use_this = (Button) dialog_set_pic.findViewById(R.id.use_this);
+		use_this.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dialog_set_pic.dismiss();
+			}
+		});
+
+		Button re_take = (Button) dialog_set_pic.findViewById(R.id.re_take);
+		re_take.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				Intent intent = new Intent(
+						android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, CAMERA);
+
+			}
+		});
+
 		tempDir = Environment.getExternalStorageDirectory() + "/"
 				+ "GetSignature" + "/";
 		ContextWrapper cw = new ContextWrapper(getApplicationContext());
@@ -142,8 +222,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		mSignature = new Signature(this, null);
 		mSignature.setField(mContent, mypath);
 		mSignature.setBackgroundColor(Color.WHITE);
-		mContent.addView(mSignature, LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT);
+		mContent.addView(mSignature, LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT);
 		mView = mContent;
 		ImageView clear = (ImageView) dialog_date.findViewById(R.id.clear);
 		clear.setOnClickListener(new OnClickListener() {
@@ -155,14 +235,72 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			}
 		});
 
+		final CheckBox accept_picture = (CheckBox) dialog_camera
+				.findViewById(R.id.checkBox1);
+		final CheckBox accept_name = (CheckBox) dialog_agree
+				.findViewById(R.id.checkBox1);
+
+		CheckBox accept = (CheckBox) dialog_accept.findViewById(R.id.accept);
+		CheckBox decline = (CheckBox) dialog_accept.findViewById(R.id.decline);
+		accept.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dialog_accept.dismiss();
+			}
+		});
+
+		decline.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				dialog_accept.dismiss();
+				DocumentViewer.this.finish();
+			}
+		});
+
+		Button camera_button = (Button) dialog_camera.findViewById(R.id.camera);
+
+		camera_button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				dialog_take_pic.show();
+
+			}
+		});
+
+		Button take_picture = (Button) dialog_take_pic
+				.findViewById(R.id.take_pic);
+
+		take_picture.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(
+						android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, CAMERA);
+			}
+		});
+
 		Button viture = (Button) dialog_agree.findViewById(R.id.viture);
 		// if decline button is clicked, close the custom dialog
 		viture.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// Close dialog
+				if (accept_name.isChecked()) {
+					dialog_camera.show();
 
-				dialog_camera.show();
+				} else {
+					showToast("Agree to Continue", Toast.LENGTH_LONG);
+
+				}
 			}
 		});
 
@@ -204,10 +342,16 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			@Override
 			public void onClick(View v) {
 				// Close dialog
-				dialog_agree.cancel();
-				dialog_camera.cancel();
-				dialog_date.cancel();
-				startActivity(new Intent(DocumentViewer.this, TestCamera.class));
+				if (accept_picture.isChecked()) {
+					dialog_agree.cancel();
+					dialog_camera.cancel();
+					dialog_date.cancel();
+					startActivity(new Intent(DocumentViewer.this,
+							TestCamera.class));
+				} else {
+					showToast("Agree to Continue", Toast.LENGTH_LONG);
+
+				}
 			}
 		});
 

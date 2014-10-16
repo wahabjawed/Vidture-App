@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -16,6 +17,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,9 +29,18 @@ public class JSONParser {
 	static JSONObject jObj = null;
 	static String json = "";
 	public HttpResponse httpResponse;
+	DefaultHttpClient httpClient;
+	ArrayList<NameValuePair> header;
 
 	// constructor
 	public JSONParser() {
+		httpClient = new DefaultHttpClient();
+		header = new ArrayList<NameValuePair>();
+
+	}
+
+	public void setHeader(String key, String value) {
+		header.add(new BasicNameValuePair(key, value));
 
 	}
 
@@ -45,8 +56,15 @@ public class JSONParser {
 			if (method == "POST") {
 				// request method is POST
 				// defaultHttpClient
-				DefaultHttpClient httpClient = new DefaultHttpClient();
+
 				HttpPost httpPost = new HttpPost(url);
+
+				for (int i = 0; i < header.size(); i++) {
+					httpPost.addHeader(header.get(i).getName(), header.get(i)
+							.getValue());
+
+				}
+
 				httpPost.setEntity(new UrlEncodedFormEntity(params));
 
 				httpResponse = httpClient.execute(httpPost);
@@ -55,17 +73,18 @@ public class JSONParser {
 
 			} else if (method == "GET") {
 				// request method is GET
-				DefaultHttpClient httpClient = new DefaultHttpClient();
+
 				String paramString = URLEncodedUtils.format(params, "utf-8");
 				url += "?" + paramString;
 				HttpGet httpGet = new HttpGet(url);
-
+				
+				for (int i = 0; i < header.size(); i++) {
+					httpGet.addHeader(header.get(i).getName(), header.get(i)
+							.getValue());
+				}
 				httpResponse = httpClient.execute(httpGet);
 				HttpEntity httpEntity = httpResponse.getEntity();
-				Log.e("Viditure",
-						""
-								+ httpResponse.getFirstHeader("X-Auth-Token")
-										.getValue());
+				
 				is = httpEntity.getContent();
 			}
 
