@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="#4ba2dc"
+        android:enabled="false"
         android:paddingLeft="20dip"
         android:paddingRight="20dip"
         android:text="Start Vituring"

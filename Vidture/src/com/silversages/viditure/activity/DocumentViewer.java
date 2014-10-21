@@ -79,9 +79,10 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			// String path = uri.getEncodedPath();
 			// showToast(uri.getPath(), Toast.LENGTH_LONG);
 			// new FetchDocRequest(uri.getEncodedPath()).PerformTask(this);
-			new FetchDocRequest("/vts/signrequest/54324d60e4b000f651da5597")
-					.PerformTask(this);
+			
 		}
+		new FetchDocRequest("/vts/signrequest/54324d60e4b000f651da5597")
+		.PerformTask(this);
 
 	}
 
@@ -115,6 +116,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 		adapter = new DocumentAdapter(this, documentItem);
 		docuemnt.setAdapter(adapter);
+		startVituring.setEnabled(true);
 
 	}
 
