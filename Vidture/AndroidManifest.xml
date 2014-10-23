@@ -57,10 +57,21 @@
         <activity
             android:name=".activity.DocumentViewer"
             android:screenOrientation="portrait" >
-            <intent-filter>
+            <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+            
+             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="54.183.77.229"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.TestCamera" >
