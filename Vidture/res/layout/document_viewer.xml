@@ -50,7 +50,7 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarStyle="insideInset"
         android:scrollbars="vertical" 
-        android:paddingBottom="10dp"/>
+        android:paddingBottom="5dp"/>
 
     <Button
         android:id="@+id/startVituring"
