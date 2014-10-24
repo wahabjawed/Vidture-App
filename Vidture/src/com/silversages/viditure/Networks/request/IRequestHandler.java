@@ -9,7 +9,7 @@ public interface IRequestHandler {
 	public Context context = ViditureApp.getContext();
 	// public String
 	// networkAddress="http://fajjemobile.info/VidtureApp/WebService/";
-	public String networkAddress = "http://54.183.77.229";
+	public String networkAddress = "http://dev.viditure.com";
 
 	public abstract void PerformTask(ViditureNetworkActivity _activity);
 

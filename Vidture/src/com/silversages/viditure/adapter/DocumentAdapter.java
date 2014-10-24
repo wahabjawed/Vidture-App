@@ -66,7 +66,7 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 		FrameLayout layout = (FrameLayout) vi.findViewById(R.id.docLay);
 		ViewHolder holder = (ViewHolder) vi.getTag();
 
-		if (obj.getFields().length > 0) {
+		if (obj.getFields() != null && obj.getFields().length > 0) {
 			for (int i = 0; i < obj.getFields().length; i++) {
 				Log.e("Viditure", "Dynamic Layout: "
 						+ obj.getFields()[i].getKind().getType());

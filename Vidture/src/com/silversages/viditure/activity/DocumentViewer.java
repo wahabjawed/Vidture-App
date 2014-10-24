@@ -77,13 +77,13 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			// may be some test here with your custom uri
 			// String var = uri.getQueryParameter("documents"); // "str" is set
 			// String path = uri.getEncodedPath();
-			// showToast(uri.getPath(), Toast.LENGTH_LONG);
-			// new FetchDocRequest(uri.getEncodedPath()).PerformTask(this);
-			
-		}
-		new FetchDocRequest("/vts/signrequest/54324d60e4b000f651da5597")
-		.PerformTask(this);
+			 //showToast(uri.getPath(), Toast.LENGTH_LONG);
+			 new FetchDocRequest(uri.getEncodedPath()).PerformTask(this);
+			//new FetchDocRequest("/vts/signrequest/543a7a83e4b0ba42a7391d11")
+			//.PerformTask(this);
 
+		}
+		
 	}
 
 	@Override
