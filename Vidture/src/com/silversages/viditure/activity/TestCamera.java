@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
@@ -91,17 +92,30 @@ public class TestCamera extends ViditureActivity implements
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
-		camera.stopPreview();
-		camera.release();
-		camera = null;
-		previewing = false;
+		// showToast("On Pause", Toast.LENGTH_SHORT);
+		if (camera != null) {
+			camera.stopPreview();
+			camera.release();
+			camera = null;
+			previewing = false;
+		}
+		surfaceHolder.removeCallback(this);
 		super.onPause();
 
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		// showToast("On Resume", Toast.LENGTH_SHORT);
+
+		super.onResume();
+	}
+
+	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
 		// TODO Auto-generated method stub
+	//	showToast("Surface Created", Toast.LENGTH_SHORT);
 		camera = Camera.open(cameraIndex);
 		camera.setDisplayOrientation(90);
 		try {

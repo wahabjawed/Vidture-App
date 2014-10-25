@@ -79,7 +79,8 @@ public class ReadSentence extends ViditureActivity implements
 		getWindow().setFormat(PixelFormat.UNKNOWN);
 		surafceView = (SurfaceView) findViewById(R.id.surfaceView1);
 		message = (TextView) findViewById(R.id.message);
-		message.setText((ObjectHolder.getDocObj().getMe()).getReadOutMessage());
+		message.setText((ObjectHolder.getDocObj()) != null ? ObjectHolder
+				.getDocObj().getMe().getReadOutMessage() : "");
 
 	}
 
@@ -134,12 +135,13 @@ public class ReadSentence extends ViditureActivity implements
 								"Fail in prepareMediaRecorder()!\n - Ended -",
 								Toast.LENGTH_LONG).show();
 						// finish();
+					} else {
+
+						mediaRecorder.start();
+						recording = true;
+						vidtureIt.setText("STOP");
+
 					}
-
-					mediaRecorder.start();
-					recording = true;
-					vidtureIt.setText("STOP");
-
 				}
 			}
 		});
@@ -156,21 +158,28 @@ public class ReadSentence extends ViditureActivity implements
 		mediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
 		mediaRecorder.setProfile(CamcorderProfile
-				.get(CamcorderProfile.QUALITY_HIGH));
+				.get(CamcorderProfile.QUALITY_LOW));
 
-		String state = Environment.getExternalStorageState();
-		if (Environment.MEDIA_MOUNTED.equals(state))
+		Boolean isSDPresent = Environment.getExternalStorageState().equals(
+				android.os.Environment.MEDIA_MOUNTED);
+		if (isSDPresent) {
 			mediaRecorder.setOutputFile(Environment
 					.getExternalStorageDirectory().getAbsolutePath()
 					+ "/myvideo.mp4");
+			Log.e("Viditure", "SDPresent");
 
-		else
+		} else {
 			mediaRecorder.setOutputFile(getFilesDir().getAbsolutePath()
 					+ "/video.mp4");
-
-		mediaRecorder.setMaxDuration(ObjectHolder.getDocObj().getMe()
-				.getVideoDuration() * 1000); // Set max duration 60 sec.
+			Log.e("Viditure", "Phone Present");
+		}
+		mediaRecorder
+				.setMaxDuration((ObjectHolder.getDocObj() != null) ? ObjectHolder
+						.getDocObj().getMe().getVideoDuration() * 1000
+						: 1000); // Set max duration 60 sec.
 		// mediaRecorder.setMaxFileSize(5000000); // Set max file size 5M
+		Log.e("Viditure", ""
+				+ ObjectHolder.getDocObj().getMe().getVideoDuration() * 1000);
 		mediaRecorder.setOrientationHint(270);
 		mediaRecorder.setPreviewDisplay(surafceView.getHolder().getSurface());
 
