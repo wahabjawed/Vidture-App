@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:gravity="left"
+    android:padding="20dip" >
+
+    <EditText
+        android:id="@+id/initials"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/border"
+        android:hint="INITIALS"
+        android:inputType="textCapWords"
+        android:maxLength="20"
+        android:textColor="#000"
+        android:textColorHint="#c6d9f1" />
+
+    <EditText
+        android:id="@+id/full_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/initials"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/border"
+        android:hint="FULL NAME"
+        android:inputType="textCapWords"
+        android:maxLength="20"
+        android:textColor="#000"
+        android:textColorHint="#c6d9f1" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/full_name"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/border"
+        android:hint="DATE"
+        android:inputType="date"
+        android:maxLength="20"
+        android:textColor="#000"
+        android:textColorHint="#c6d9f1" />
+
+    <Button
+        android:id="@+id/pictures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="#4ba2dc"
+        android:paddingLeft="40dip"
+        android:paddingRight="40dip"
+        android:text="Take Picture"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/viditure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pictures"
+        android:layout_centerHorizontal="true"
+        android:background="#4ba2dc"
+        android:paddingLeft="40dip"
+        android:paddingRight="40dip"
+        android:text="Viditure It"
+        android:textColor="#fff" />
+
+</RelativeLayout>

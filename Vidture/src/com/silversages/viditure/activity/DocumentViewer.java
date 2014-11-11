@@ -73,6 +73,13 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	Dialog dialog_signature;
 	EditText date;
 
+	// dialog dummy
+	Dialog dialog_dummy;
+	EditText dummy_fullname;
+	EditText dummy_date;
+	EditText dummy_initials;
+	Button dummy_viditure;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -157,12 +164,18 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		dialog_accept = new Dialog(DocumentViewer.this);
 		dialog_take_pic = new Dialog(DocumentViewer.this);
 		dialog_set_pic = new Dialog(DocumentViewer.this);
+		dialog_dummy = new Dialog(DocumentViewer.this);
 		dialog_signature.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_name.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_camera.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_accept.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_take_pic.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_set_pic.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog_dummy.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		dialog_dummy.setContentView(R.layout.dialog_dummy);
+		dialog_dummy.getWindow().setBackgroundDrawableResource(
+				R.drawable.dialogbox);
 
 		dialog_camera.setContentView(R.layout.dialog_picture);
 		dialog_camera.getWindow().setBackgroundDrawableResource(
@@ -181,7 +194,9 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		dialog_accept.getWindow().setBackgroundDrawableResource(
 				R.drawable.dialogbox);
 		dialog_accept.setCanceledOnTouchOutside(false);
-		dialog_accept.show();
+
+		// important
+		// dialog_accept.show();
 
 		dialog_take_pic.setContentView(R.layout.dialog_take_picture);
 		dialog_take_pic.getWindow().setBackgroundDrawableResource(
@@ -367,7 +382,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				dialog_name.show();
+				// dialog_name.show();
+				dialog_dummy.show();
 			}
 		});
 	}

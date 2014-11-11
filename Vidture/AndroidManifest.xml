@@ -32,6 +32,13 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <activity android:name=".activity.TestCamera" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.DocumentViewer"
             android:screenOrientation="portrait" >
@@ -44,13 +51,6 @@
                 <data
                     android:host="dev.viditure.com"
                     android:scheme="http" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.TestCamera" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.ReadSentence" >
