@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="4"
+        android:layout_weight="5"
         android:scrollbarAlwaysDrawVerticalTrack="false" />
 
     <TextView
@@ -64,6 +64,6 @@
         android:gravity="center_vertical"
         android:text="I want to do e-signature instead"
         android:textColor="#4ba2dc"
-        android:textSize="22sp" />
+        android:textSize="20sp" />
 
 </LinearLayout>

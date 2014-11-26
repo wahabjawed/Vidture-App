@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="7dp"
-        android:text="Pls tske of photo to your ID."
+        android:text="Pls take of photo to your ID."
         android:textColor="#4ba2dc"
         android:textSize="20sp" />
 

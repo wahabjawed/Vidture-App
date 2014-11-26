@@ -2,12 +2,14 @@ package com.silversages.viditure.activity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.hardware.Camera.Size;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
 import com.silversages.viditure.objects.ObjectHolder;
+import com.silversages.viditure.util.CameraUtil;
 
 @SuppressLint("SdCardPath")
 public class ReadSentence extends ViditureActivity implements
@@ -64,7 +67,7 @@ public class ReadSentence extends ViditureActivity implements
 		surfaceHolder = surafceView.getHolder();
 		surfaceHolder.addCallback(this);
 		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
+		surfaceHolder.setSizeFromLayout();
 		super.onResume();
 	}
 
@@ -95,12 +98,29 @@ public class ReadSentence extends ViditureActivity implements
 
 			Camera.Parameters params = c.getParameters();
 			params.setRotation(90);
+
+			int SurfaceViewWidth = surafceView.getWidth();
+			int SurfaceViewHeight = surafceView.getHeight();
+
+			Log.e("SurfaceViewWidth", SurfaceViewWidth + "");
+			Log.e("SurfaceViewHeight", SurfaceViewHeight + "");
+
+			List<Size> sizes = c.getParameters().getSupportedPreviewSizes();
+			Camera.Size optimalSize = CameraUtil.getOptimalPreviewSize(sizes,
+					SurfaceViewWidth, SurfaceViewHeight);
+
+			Log.e("optimalSizeHeight", optimalSize.height + "");
+			Log.e("optimalSizeWidth", optimalSize.width + "");
+
+			// set parameters
+			params.setPreviewSize(optimalSize.width, optimalSize.height);
+
 			c.setParameters(params);
 
 		} catch (Exception e) {
 
 			// Camera is not available (in use or does not exist)
-			Log.d("Viditure", e.getMessage());
+			Log.e("Viditure", e.getMessage());
 		}
 		return c; // returns null if camera is unavailable
 	}
@@ -178,8 +198,8 @@ public class ReadSentence extends ViditureActivity implements
 						.getDocObj().getMe().getVideoDuration() * 1000
 						: 1000); // Set max duration 60 sec.
 		// mediaRecorder.setMaxFileSize(5000000); // Set max file size 5M
-		Log.e("Viditure", ""
-				+ ObjectHolder.getDocObj().getMe().getVideoDuration() * 1000);
+		//Log.e("Viditure", ""
+	//			+ ObjectHolder.getDocObj().getMe().getVideoDuration() * 1000);
 		mediaRecorder.setOrientationHint(270);
 		mediaRecorder.setPreviewDisplay(surafceView.getHolder().getSurface());
 
