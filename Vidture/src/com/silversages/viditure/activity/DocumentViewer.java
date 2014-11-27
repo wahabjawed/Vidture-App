@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -33,7 +34,8 @@ import com.silversages.viditure.objects.fetchDocument.Pages;
 import com.silversages.viditure.util.Signature;
 import com.silversages.viditure.zainu.ZainuObj;
 
-public class DocumentViewer extends ViditureNetworkActivity {
+public class DocumentViewer extends ViditureNetworkActivity implements
+		OnClickListener {
 
 	private static final int CAMERA = 0;
 	ListView docuemnt;
@@ -414,6 +416,13 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		// TODO Auto-generated method stub
 		super.onResume();
 
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+
+		Log.e("ID", "" + v.getId());
 	}
 
 }
