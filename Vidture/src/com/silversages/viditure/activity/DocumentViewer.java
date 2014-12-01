@@ -32,7 +32,6 @@ import com.silversages.viditure.adapter.DocumentAdapter;
 import com.silversages.viditure.objects.ObjectHolder;
 import com.silversages.viditure.objects.fetchDocument.Pages;
 import com.silversages.viditure.util.Signature;
-import com.silversages.viditure.zainu.ZainuObj;
 
 public class DocumentViewer extends ViditureNetworkActivity implements
 		OnClickListener {
@@ -81,6 +80,9 @@ public class DocumentViewer extends ViditureNetworkActivity implements
 	EditText dummy_date;
 	EditText dummy_initials;
 	Button dummy_viditure;
+
+	// dialog name confirm
+	Dialog dialog_name_confirm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +169,7 @@ public class DocumentViewer extends ViditureNetworkActivity implements
 		dialog_take_pic = new Dialog(DocumentViewer.this);
 		dialog_set_pic = new Dialog(DocumentViewer.this);
 		dialog_dummy = new Dialog(DocumentViewer.this);
+		dialog_name_confirm = new Dialog(DocumentViewer.this);
 		dialog_signature.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_name.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_camera.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -174,6 +177,11 @@ public class DocumentViewer extends ViditureNetworkActivity implements
 		dialog_take_pic.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_set_pic.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_dummy.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog_name_confirm.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		dialog_dummy.setContentView(R.layout.dialog_name_confirm);
+		dialog_dummy.getWindow().setBackgroundDrawableResource(
+				R.drawable.dialogbox);
 
 		dialog_dummy.setContentView(R.layout.dialog_dummy);
 		dialog_dummy.getWindow().setBackgroundDrawableResource(
@@ -423,6 +431,12 @@ public class DocumentViewer extends ViditureNetworkActivity implements
 		// TODO Auto-generated method stub
 
 		Log.e("ID", "" + v.getId());
+	}
+
+	public void openDialog() {
+
+		dialog_name_confirm.show();
+
 	}
 
 }
