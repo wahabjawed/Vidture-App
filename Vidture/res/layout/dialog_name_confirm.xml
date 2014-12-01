@@ -1,62 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+ 	android:layout_height="wrap_content"
     android:background="#fff"
     android:gravity="left"
-    android:orientation="vertical"
     android:padding="20dip" >
 
-    <TextView
-        android:id="@+id/terms_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="7dp"
-        android:text="Your Name"
-        android:textColor="#4ba2dc"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/fullname"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/checktext"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/border"
-        android:hint="FULL NAME"
-        android:inputType="textPersonName"
-        android:maxLength="20"
-        android:textColor="#000"
-        android:textColorHint="#c6d9f1" />
-
     <LinearLayout
-        android:id="@+id/checktext"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+       android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/accept"
+        <TextView
+            android:id="@+id/terms_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dip"
-            android:layout_weight="1"
-            android:background="#4ba2dc"
-            android:text="OK"
-            android:textColor="#fff"
-            android:textSize="15sp" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:text="Your Name"
+            android:textColor="#4ba2dc"
+            android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/decline"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/fullname"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#4ba2dc"
-            android:text="SKIP"
-            android:textColor="#fff"
-            android:textSize="15sp" />
+            android:layout_below="@id/checktext"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border"
+            android:hint="FULL NAME"
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:textColor="#000"
+            android:textColorHint="#c6d9f1" />
+
+        <LinearLayout
+            android:id="@+id/checktext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dip"
+                android:layout_weight="1"
+                android:background="#4ba2dc"
+                android:text="OK"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/decline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#4ba2dc"
+                android:text="SKIP"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

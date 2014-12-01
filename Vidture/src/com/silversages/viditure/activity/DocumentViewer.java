@@ -179,8 +179,8 @@ public class DocumentViewer extends ViditureNetworkActivity implements
 		dialog_dummy.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_name_confirm.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		dialog_dummy.setContentView(R.layout.dialog_name_confirm);
-		dialog_dummy.getWindow().setBackgroundDrawableResource(
+		dialog_name_confirm.setContentView(R.layout.dialog_name_confirm);
+		dialog_name_confirm.getWindow().setBackgroundDrawableResource(
 				R.drawable.dialogbox);
 
 		dialog_dummy.setContentView(R.layout.dialog_dummy);
