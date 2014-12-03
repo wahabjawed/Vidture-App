@@ -30,6 +30,7 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 	private DocumentViewer activity;
 	private Pages[] data;
 	Pages obj = null;
+	public static TextView stateTextView;
 
 	public DocumentAdapter(Activity context, Pages[] _data) {
 		super(context, R.layout.row_document, _data);
@@ -119,7 +120,8 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 									if (obj.getFields()[i].getKind().getType()
 											.equals("TEXT")) {
 
-										TextView text = new TextView(activity);
+										final TextView text = new TextView(
+												activity);
 										// text.setId(R.id.);
 										text.setText(obj.getFields()[i]
 												.getKind().getName());
@@ -144,8 +146,10 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 											public void onClick(View arg0) {
 												// TODO Auto-generated method
 												// stub
-												DocumentAdapter.this.activity
-														.openDialog();
+												stateTextView = text;
+												DocumentAdapter.this.activity.openDialog(obj
+														.getFields()[count]
+														.getKind().getName());
 
 												Toast.makeText(
 														DocumentAdapter.this.activity,

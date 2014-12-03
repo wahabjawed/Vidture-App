@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -33,8 +32,7 @@ import com.silversages.viditure.objects.ObjectHolder;
 import com.silversages.viditure.objects.fetchDocument.Pages;
 import com.silversages.viditure.util.Signature;
 
-public class DocumentViewer extends ViditureNetworkActivity implements
-		OnClickListener {
+public class DocumentViewer extends ViditureNetworkActivity {
 
 	private static final int CAMERA = 0;
 	ListView docuemnt;
@@ -83,6 +81,11 @@ public class DocumentViewer extends ViditureNetworkActivity implements
 
 	// dialog name confirm
 	Dialog dialog_name_confirm;
+	Button dialog_name_skip, dialog_name_ok;
+	EditText dialog_name_field;
+
+	// Data
+	String name, d_date, initials;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -388,6 +391,52 @@ public class DocumentViewer extends ViditureNetworkActivity implements
 			}
 		});
 
+		dialog_name_skip = (Button) dialog_name_confirm
+				.findViewById(R.id.decline);
+		dialog_name_ok = (Button) dialog_name_confirm.findViewById(R.id.accept);
+		dialog_name_field = (EditText) dialog_name_confirm.findViewById(R.id.fullname);
+
+		dialog_name_skip.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				dialog_name_confirm.dismiss();
+			}
+		});
+		dialog_name_ok.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				DocumentAdapter.stateTextView.setText(name);
+				dialog_name_confirm.dismiss();
+			}
+		});
+
+		dummy_viditure = (Button) dialog_dummy.findViewById(R.id.viditure);
+		dummy_fullname = (EditText) dialog_dummy.findViewById(R.id.full_name);
+		dummy_initials = (EditText) dialog_dummy.findViewById(R.id.initials);
+		dummy_date = (EditText) dialog_dummy.findViewById(R.id.date);
+		dummy_viditure.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (dummy_fullname.getText().length() > 1
+						&& dummy_initials.getText().length() > 1
+						&& dummy_date.getText().length() > 1) {
+
+					name = dummy_fullname.getText().toString();
+					initials = dummy_initials.getText().toString();
+					d_date = dummy_date.getText().toString();
+					dialog_dummy.dismiss();
+				} else {
+					showToast("Fill All the Data", Toast.LENGTH_LONG);
+				}
+			}
+		});
+
 		startVituring.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -426,15 +475,15 @@ public class DocumentViewer extends ViditureNetworkActivity implements
 
 	}
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
+	public void openDialog(String type) {
+		if (type.equals("fullname")) {
+			dialog_name_field.setText(name);
+		} else if (type.equals("initials")) {
+			dialog_name_field.setText(initials);
 
-		Log.e("ID", "" + v.getId());
-	}
-
-	public void openDialog() {
-
+		} else if (type.equals("date")) {
+			dialog_name_field.setText(d_date);
+		}
 		dialog_name_confirm.show();
 
 	}
