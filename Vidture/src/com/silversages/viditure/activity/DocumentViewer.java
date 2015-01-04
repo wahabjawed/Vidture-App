@@ -33,7 +33,7 @@ import com.silversages.viditure.objects.fetchDocument.Pages;
 import com.silversages.viditure.util.Signature;
 
 public class DocumentViewer extends ViditureNetworkActivity {
-
+	private int dummyFieldFilled = 0;
 	private static final int CAMERA = 0;
 	ListView docuemnt;
 	Button startVituring;
@@ -394,7 +394,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		dialog_name_skip = (Button) dialog_name_confirm
 				.findViewById(R.id.decline);
 		dialog_name_ok = (Button) dialog_name_confirm.findViewById(R.id.accept);
-		dialog_name_field = (EditText) dialog_name_confirm.findViewById(R.id.fullname);
+		dialog_name_field = (EditText) dialog_name_confirm
+				.findViewById(R.id.fullname);
 
 		dialog_name_skip.setOnClickListener(new OnClickListener() {
 
@@ -431,6 +432,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 					initials = dummy_initials.getText().toString();
 					d_date = dummy_date.getText().toString();
 					dialog_dummy.dismiss();
+					dummyFieldFilled = 1;
 				} else {
 					showToast("Fill All the Data", Toast.LENGTH_LONG);
 				}
@@ -442,7 +444,13 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			@Override
 			public void onClick(View arg0) {
 				// dialog_name.show();
-				dialog_dummy.show();
+				if (dummyFieldFilled == 0) {
+					dialog_dummy.show();
+				} else {
+
+					startActivity(new Intent(DocumentViewer.this,
+							TestCamera.class));
+				}
 			}
 		});
 	}
