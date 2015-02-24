@@ -72,14 +72,7 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 									MeasureSpec.UNSPECIFIED);
 							documentPic.measure(MeasureSpec.UNSPECIFIED,
 									MeasureSpec.UNSPECIFIED);
-							Log.e("ImageWidth",
-									"" + documentPic.getMeasuredWidth());
-							Log.e("ImageHeight",
-									"" + documentPic.getMeasuredHeight());
-							// Log.e("LayoutWidth", "" +
-							// holder.layout.getWidth());
-							// Log.e("LayoutHeight",
-							// "" + holder.layout.getHeight());
+
 							Log.e("LayoutYOffset",
 									""
 											+ (layout.getMeasuredHeight() - documentPic
@@ -89,13 +82,18 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 											+ (layout.getMeasuredWidth() - documentPic
 													.getMeasuredWidth()) / 2);
 
-							Log.e("PageWidth", ""
+							Log.e("PageWidthFromURL", ""
 									+ obj.getPagePosition().getWidth());
-							Log.e("PageHeight", ""
+							Log.e("PageHeightFromURL", ""
 									+ obj.getPagePosition().getHeight());
 
+							Log.e("PageWidthLayout",
+									"" + documentPic.getWidth());
+							Log.e("PageHeightLayout",
+									"" + documentPic.getHeight());
+
 							double PageWidth = obj.getPagePosition().getWidth();
-							double ImageWidth = documentPic.getMeasuredWidth();
+							double ImageWidth = documentPic.getWidth();
 
 							double PageHeight = obj.getPagePosition()
 									.getHeight();
@@ -117,57 +115,83 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 													+ obj.getFields()[i]
 															.getKind()
 															.getType());
-									if (obj.getFields()[i].getKind().getType()
-											.equals("TEXT")) {
+									// if
+									// (obj.getFields()[i].getKind().getType()
+									// .equals("TEXT")) {
 
-										final TextView text = new TextView(
-												activity);
-										// text.setId(R.id.);
-										text.setText(obj.getFields()[i]
-												.getKind().getName());
-										text.setBackgroundColor(Color.BLUE);
-										FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-												(int) (obj.getFields()[i]
-														.getScreenPos()
-														.getWidth() * widthRatio),
-												(int) (obj.getFields()[i]
-														.getScreenPos()
-														.getHeight() * heightRatio),
-												Gravity.TOP | Gravity.LEFT);
-										lp.topMargin = (int) (obj.getFields()[i]
-												.getScreenPos().getTop() * heightRatio);
-										lp.leftMargin = (int) (obj.getFields()[i]
-												.getScreenPos().getLeft() * widthRatio)
-												+ ((layout.getMeasuredWidth() - documentPic
-														.getMeasuredWidth()) / 2);
-										text.setOnClickListener(new OnClickListener() {
+									final TextView text = new TextView(activity);
+									final ImageView label = new ImageView(
+											activity);
+									// text.setId(R.id.);
+									text.setText(obj.getFields()[i].getKind()
+											.getName());
+									text.setTextSize(8.0f);
+									text.setBackgroundColor(Color.BLUE);
+									FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+											(int) (obj.getFields()[i]
+													.getScreenPos().getWidth() * widthRatio),
+											(int) (obj.getFields()[i]
+													.getScreenPos().getHeight() * heightRatio),
+											Gravity.TOP | Gravity.LEFT);
+									lp.topMargin = (int) (obj.getFields()[i]
+											.getScreenPos().getTop() * heightRatio)
+											- ((int) (obj.getFields()[i]
+													.getScreenPos().getHeight() * heightRatio));
+									lp.leftMargin = (int) (obj.getFields()[i]
+											.getScreenPos().getLeft() * widthRatio)
+											+ ((layout.getMeasuredWidth() - documentPic
+													.getMeasuredWidth()) / 2);
 
-											@Override
-											public void onClick(View arg0) {
-												// TODO Auto-generated method
-												// stub
-												stateTextView = text;
-												DocumentAdapter.this.activity.openDialog(obj
-														.getFields()[count]
-														.getKind().getName());
+									Log.e("Viditure",
+											"Field Top: "
+													+ obj.getFields()[i]
+															.getScreenPos()
+															.getTop()
+													+ "--"
+													+ obj.getFields()[i]
+															.getScreenPos()
+															.getTop()
+													* heightRatio);
 
-												Toast.makeText(
-														DocumentAdapter.this.activity,
-														obj.getFields()[count]
-																.getKind()
-																.getName(),
-														Toast.LENGTH_LONG)
-														.show();
-											}
-										});
-										// lp.horizontalMargin =
-										// obj.getFields()[i].getScreenPos()
-										// .getLeft() - 45;
-										// lp.verticalMargin =
-										// obj.getFields()[i].getScreenPos()
-										// .getTop() - 80;
-										layout.addView(text, lp);
-									}
+									Log.e("Viditure",
+											"Field Left: "
+													+ obj.getFields()[i]
+															.getScreenPos()
+															.getLeft()
+													+ "--"
+													+ obj.getFields()[i]
+															.getScreenPos()
+															.getLeft()
+													* heightRatio);
+
+									text.setOnClickListener(new OnClickListener() {
+
+										@Override
+										public void onClick(View arg0) {
+											// TODO Auto-generated method
+											// stub
+											stateTextView = text;
+											DocumentAdapter.this.activity
+													.openDialog(obj.getFields()[count]
+															.getKind()
+															.getName());
+
+											Toast.makeText(
+													DocumentAdapter.this.activity,
+													obj.getFields()[count]
+															.getKind()
+															.getName(),
+													Toast.LENGTH_LONG).show();
+										}
+									});
+									// lp.horizontalMargin =
+									// obj.getFields()[i].getScreenPos()
+									// .getLeft() - 45;
+									// lp.verticalMargin =
+									// obj.getFields()[i].getScreenPos()
+									// .getTop() - 80;
+									layout.addView(text, lp);
+									// }
 								}
 							}
 
