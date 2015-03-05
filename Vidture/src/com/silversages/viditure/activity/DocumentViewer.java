@@ -167,7 +167,6 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		// TODO Auto-generated method stub
 
 		docuemntList = (ListView) findViewById(R.id.document);
-		docuemntList.setEnabled(false);
 		startVituring = (Button) findViewById(R.id.startVituring);
 		dialog_camera = new Dialog(DocumentViewer.this);
 		dialog_name = new Dialog(DocumentViewer.this);
@@ -452,7 +451,6 @@ public class DocumentViewer extends ViditureNetworkActivity {
 					d_date = dummy_date.getText().toString();
 					dialog_dummy.dismiss();
 					dummyFieldFilled = 1;
-					docuemntList.setEnabled(true);
 				} else {
 					showToast("Fill All the Data", Toast.LENGTH_LONG);
 				}

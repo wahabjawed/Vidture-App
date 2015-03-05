@@ -188,7 +188,8 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 											} else if (obj.getFields()[count]
 													.getKind().getName()
 													.equals("video")) {
-												DocumentAdapter.this.activity.openDialogVideo();
+												DocumentAdapter.this.activity
+														.openDialogVideo();
 											}
 											Toast.makeText(
 													DocumentAdapter.this.activity,
@@ -215,4 +216,23 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 		}
 		return vi;
 	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return data.length;
+	}
+
+	@Override
+	public int getViewTypeCount() {
+
+		return getCount();
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+
+		return position;
+	}
+
 }
