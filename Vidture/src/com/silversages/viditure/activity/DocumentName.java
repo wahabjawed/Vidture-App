@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
@@ -63,6 +65,26 @@ public class DocumentName extends ViditureActivity {
 										.getExternalStorageDirectory()
 										.getAbsolutePath()
 										+ "/myvideo.mp4")).asJsonObject();
+
+				Ion.with(DocumentName.this)
+						.load(ObjectHolder.getDocObj().getMe()
+								.getSignerInput_url())
+						.setHeader("X-Auth-Toekn",
+								ObjectHolder.getAuthXObject().getToken())
+						// .uploadProgressBar(uploadProgressBar)
+						.setMultipartParameter("goop", "noop")
+						.setMultipartFile("filename.zip",
+								new File("/sdcard/filename.zip"))
+						.asJsonObject()
+						.setCallback(new FutureCallback<JsonObject>() {
+
+							@Override
+							public void onCompleted(Exception arg0,
+									JsonObject arg1) {
+								// TODO Auto-generated method stub
+
+							}
+						});
 
 			}
 		});

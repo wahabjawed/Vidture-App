@@ -170,12 +170,26 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 										public void onClick(View arg0) {
 											// TODO Auto-generated method
 											// stub
-											stateTextView = text;
-											DocumentAdapter.this.activity
-													.openDialog(obj.getFields()[count]
+											if (obj.getFields()[count]
+													.getKind().getName()
+													.equals("initials")
+													|| obj.getFields()[count]
 															.getKind()
-															.getName());
-
+															.getName()
+															.equals("fullname")
+													|| obj.getFields()[count]
+															.getKind()
+															.getName()
+															.equals("date")) {
+												stateTextView = text;
+												DocumentAdapter.this.activity.openDialogName(obj
+														.getFields()[count]
+														.getKind().getName());
+											} else if (obj.getFields()[count]
+													.getKind().getName()
+													.equals("video")) {
+												DocumentAdapter.this.activity.openDialogVideo();
+											}
 											Toast.makeText(
 													DocumentAdapter.this.activity,
 													obj.getFields()[count]

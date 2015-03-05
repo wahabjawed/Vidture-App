@@ -11,10 +11,13 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -35,7 +38,7 @@ import com.silversages.viditure.util.Signature;
 public class DocumentViewer extends ViditureNetworkActivity {
 	private int dummyFieldFilled = 0;
 	private static final int CAMERA = 0;
-	ListView docuemnt;
+	ListView docuemntList;
 	Button startVituring;
 
 	Dialog dialog_accept;
@@ -85,7 +88,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	EditText dialog_name_field;
 
 	// Data
-	String name, d_date, initials;
+	String name, d_date, initials, data;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +145,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		Pages[] documentItem = ObjectHolder.getDocObj().getPages();
 
 		adapter = new DocumentAdapter(this, documentItem);
-		docuemnt.setAdapter(adapter);
+		docuemntList.setAdapter(adapter);
 		startVituring.setEnabled(true);
 
 	}
@@ -163,7 +166,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	public void setupView() {
 		// TODO Auto-generated method stub
 
-		docuemnt = (ListView) findViewById(R.id.document);
+		docuemntList = (ListView) findViewById(R.id.document);
+		docuemntList.setEnabled(false);
 		startVituring = (Button) findViewById(R.id.startVituring);
 		dialog_camera = new Dialog(DocumentViewer.this);
 		dialog_name = new Dialog(DocumentViewer.this);
@@ -232,6 +236,20 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	@Override
 	public void setupListner() {
 		// TODO Auto-generated method stub
+
+		docuemntList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				if (dummyFieldFilled == 0) {
+					showToast("Kindly Click Start Viditure", Toast.LENGTH_SHORT);
+				} else {
+					showToast("Kindly Click Start Viditure", Toast.LENGTH_SHORT);
+				}
+			}
+		});
 
 		dilaog_image = (ImageView) dialog_set_pic.findViewById(R.id.imageView1);
 		Button use_this = (Button) dialog_set_pic.findViewById(R.id.use_this);
@@ -410,7 +428,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				DocumentAdapter.stateTextView.setText(name);
+				showToast(data, Toast.LENGTH_SHORT);
+				DocumentAdapter.stateTextView.setText(data + "");
 				dialog_name_confirm.dismiss();
 			}
 		});
@@ -433,6 +452,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 					d_date = dummy_date.getText().toString();
 					dialog_dummy.dismiss();
 					dummyFieldFilled = 1;
+					docuemntList.setEnabled(true);
 				} else {
 					showToast("Fill All the Data", Toast.LENGTH_LONG);
 				}
@@ -483,15 +503,28 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 	}
 
-	public void openDialog(String type) {
+	public void openDialogVideo() {
+
+		startActivity(new Intent(DocumentViewer.this, TestCamera.class));
+	}
+
+	public void openDialogSignature() {
+		dialog_signature.show();
+	}
+
+	public void openDialogName(String type) {
 		if (type.equals("fullname")) {
 			dialog_name_field.setText(name);
+			data = name.trim();
 		} else if (type.equals("initials")) {
 			dialog_name_field.setText(initials);
+			data = initials.trim();
 
 		} else if (type.equals("date")) {
 			dialog_name_field.setText(d_date);
+			data = d_date.trim();
 		}
+
 		dialog_name_confirm.show();
 
 	}
