@@ -3,6 +3,7 @@ package com.silversages.viditure.activity;
 import java.io.File;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -38,7 +39,7 @@ import com.silversages.viditure.util.Signature;
 public class DocumentViewer extends ViditureNetworkActivity {
 	private int dummyFieldFilled = 0;
 	private static final int CAMERA = 0;
-	ListView docuemntList;
+	public ListView docuemntList;
 	Button startVituring;
 
 	Dialog dialog_accept;
@@ -90,6 +91,9 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	// Data
 	String name, d_date, initials, data;
 
+	// progress dialg
+	public ProgressDialog dialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -113,7 +117,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 			// .PerformTask(this);
 
 		}
-
+		dialog = ProgressDialog.show(this, "", "Fetching Documents...", true);
+		dialog.setCancelable(false);
 	}
 
 	@Override
@@ -501,6 +506,11 @@ public class DocumentViewer extends ViditureNetworkActivity {
 
 	}
 
+	public void openDialogPhoto() {
+
+		dialog_camera.show();
+	}
+
 	public void openDialogVideo() {
 
 		startActivity(new Intent(DocumentViewer.this, TestCamera.class));
@@ -511,20 +521,23 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	}
 
 	public void openDialogName(String type) {
-		if (type.equals("fullname")) {
-			dialog_name_field.setText(name);
-			data = name.trim();
-		} else if (type.equals("initials")) {
-			dialog_name_field.setText(initials);
-			data = initials.trim();
+		if (name != null && initials != null && d_date != null) {
+			if (type.equals("fullname")) {
+				dialog_name_field.setText(name);
+				data = name.trim();
+			} else if (type.equals("initials")) {
+				dialog_name_field.setText(initials);
+				data = initials.trim();
 
-		} else if (type.equals("date")) {
-			dialog_name_field.setText(d_date);
-			data = d_date.trim();
+			} else if (type.equals("date")) {
+				dialog_name_field.setText(d_date);
+				data = d_date.trim();
+			}
+
+			dialog_name_confirm.show();
+		} else {
+			showToast("Start Viditure First", Toast.LENGTH_SHORT);
 		}
-
-		dialog_name_confirm.show();
-
 	}
 
 }

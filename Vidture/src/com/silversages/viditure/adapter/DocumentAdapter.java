@@ -31,11 +31,23 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 	private Pages[] data;
 	Pages obj = null;
 	public static TextView stateTextView;
+	public int counts;
+
+	class pageData {
+
+		int pageNo;
+		int fieldno;
+		int y;
+		boolean isDone = false;
+		String data;
+
+	}
 
 	public DocumentAdapter(Activity context, Pages[] _data) {
 		super(context, R.layout.row_document, _data);
 		this.activity = (DocumentViewer) context;
 		this.data = _data;
+		counts = data.length;
 	}
 
 	@Override
@@ -187,16 +199,21 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 														.getKind().getName());
 											} else if (obj.getFields()[count]
 													.getKind().getName()
-													.equals("video")) {
+													.equals("viditure")) {
 												DocumentAdapter.this.activity
 														.openDialogVideo();
+											} else if (obj.getFields()[count]
+													.getKind().getName()
+													.equals("photoid")) {
+												DocumentAdapter.this.activity
+														.openDialogPhoto();
 											}
-											Toast.makeText(
-													DocumentAdapter.this.activity,
-													obj.getFields()[count]
-															.getKind()
-															.getName(),
-													Toast.LENGTH_LONG).show();
+											// Toast.makeText(
+											// DocumentAdapter.this.activity,
+											// obj.getFields()[count]
+											// .getKind()
+											// .getName(),
+											// Toast.LENGTH_LONG).show();
 										}
 									});
 									// lp.horizontalMargin =
@@ -209,7 +226,25 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 									// }
 								}
 							}
+							counts--;
 
+							if (counts == 0) {
+								DocumentAdapter.this.activity.dialog.dismiss();
+								DocumentAdapter.this.activity.docuemntList
+										.setSelection(0);
+								counts--;
+
+							} else if (counts > 0) {
+								DocumentAdapter.this.activity.docuemntList
+										.smoothScrollToPosition(data.length
+												- counts - 1);
+								double percent = (((double) data.length - (double) counts) / (double) data.length)
+										* (double) 100;
+
+								DocumentAdapter.this.activity.dialog
+										.setMessage("Fetching Documents..."
+												+ percent + "%");
+							}
 						}
 					});
 
