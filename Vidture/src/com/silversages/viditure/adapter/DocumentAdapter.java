@@ -132,24 +132,33 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 									// .equals("TEXT")) {
 
 									final TextView text = new TextView(activity);
-									final ImageView label = new ImageView(
+									final ImageView filedImage = new ImageView(
 											activity);
+									Ion.with(ViditureApp.getContext())
+											.load(obj.getFields()[i].getKind()
+													.getFieldImage_url())
+											.setHeader(
+													"X-Auth-Token",
+													ObjectHolder
+															.getAuthXObject()
+															.getToken())
+											.intoImageView(filedImage);
 									// text.setId(R.id.);
 									text.setText(obj.getFields()[i].getKind()
 											.getName());
 									text.setTextSize(8.0f);
 									text.setBackgroundColor(Color.BLUE);
-									FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+									FrameLayout.LayoutParams lpTxt = new FrameLayout.LayoutParams(
 											(int) (obj.getFields()[i]
 													.getScreenPos().getWidth() * widthRatio),
 											(int) (obj.getFields()[i]
 													.getScreenPos().getHeight() * heightRatio),
 											Gravity.TOP | Gravity.LEFT);
-									lp.topMargin = (int) (obj.getFields()[i]
+									lpTxt.topMargin = (int) (obj.getFields()[i]
 											.getScreenPos().getTop() * heightRatio)
 											- ((int) (obj.getFields()[i]
 													.getScreenPos().getHeight() * heightRatio));
-									lp.leftMargin = (int) (obj.getFields()[i]
+									lpTxt.leftMargin = (int) (obj.getFields()[i]
 											.getScreenPos().getLeft() * widthRatio)
 											+ ((layout.getMeasuredWidth() - documentPic
 													.getMeasuredWidth()) / 2);
@@ -222,7 +231,9 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 									// lp.verticalMargin =
 									// obj.getFields()[i].getScreenPos()
 									// .getTop() - 80;
-									layout.addView(text, lp);
+									layout.addView(text, lpTxt);
+
+									layout.addView(filedImage, lpTxt);
 									// }
 								}
 							}
