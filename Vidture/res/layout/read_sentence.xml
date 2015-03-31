@@ -21,32 +21,33 @@
         android:textColor="#4ba2dc"
         android:textSize="22sp" />
 
-   <SurfaceView
-       android:id="@+id/surfaceView1"
-       android:layout_width="wrap_content"
-       android:layout_height="0dp"
-       android:layout_gravity="center_horizontal"
-       android:layout_weight="3.8"
-       android:scrollbarAlwaysDrawVerticalTrack="false" />
+    <SurfaceView
+        android:id="@+id/surfaceView1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="3.8"
+        android:scrollbarAlwaysDrawVerticalTrack="false" />
 
-     <TextView
-         android:id="@+id/message"
-         android:layout_width="fill_parent"
-         android:layout_height="0dp"
-         android:layout_below="@+id/camera"
-         android:layout_centerHorizontal="true"
-         android:layout_marginBottom="10dp"
-         android:layout_marginTop="10dp"
-         android:layout_weight="0.8"
-         android:background="@drawable/border"
-         android:gravity="top|center_vertical"
-         android:lines="4"
-         android:maxLength="100"
-         android:text="I john Smith, agree to document (ID)"
-         android:textColor="#000"
-         android:textColorHint="#c6d9f1"
-         android:textSize="25sp" >
-
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/camera"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.8"
+        android:background="@drawable/border"
+        android:gravity="top|center_vertical"
+        android:lines="4"
+        android:maxLength="100"
+        android:text="I john Smith, agree to document (ID)"
+        android:textColor="#000"
+        android:textColorHint="#c6d9f1"
+        android:textSize="25sp" >
     </TextView>
 
     <Button
@@ -63,5 +64,5 @@
         android:text="Viditure It"
         android:textColor="#fff"
         android:textSize="20sp" />
-   
+
 </LinearLayout>

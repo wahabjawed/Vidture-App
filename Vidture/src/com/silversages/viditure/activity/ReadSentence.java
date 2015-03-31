@@ -144,7 +144,7 @@ public class ReadSentence extends ViditureActivity implements
 
 					// Exit after saved
 					startActivity(new Intent(ReadSentence.this, ViewVideo.class));
-					// finish();
+					ReadSentence.this.finish();
 				} else {
 
 					// Release Camera before MediaRecorder start
@@ -198,8 +198,8 @@ public class ReadSentence extends ViditureActivity implements
 						.getDocObj().getMe().getVideoDuration() * 1000
 						: 1000); // Set max duration 60 sec.
 		// mediaRecorder.setMaxFileSize(5000000); // Set max file size 5M
-		//Log.e("Viditure", ""
-	//			+ ObjectHolder.getDocObj().getMe().getVideoDuration() * 1000);
+		// Log.e("Viditure", ""
+		// + ObjectHolder.getDocObj().getMe().getVideoDuration() * 1000);
 		mediaRecorder.setOrientationHint(270);
 		mediaRecorder.setPreviewDisplay(surafceView.getHolder().getSurface());
 

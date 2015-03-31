@@ -65,7 +65,7 @@ public class TestCamera extends ViditureActivity implements
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
+				TestCamera.this.finish();
 				startActivity(new Intent(TestCamera.this, ReadSentence.class));
 			}
 		});
@@ -165,13 +165,12 @@ public class TestCamera extends ViditureActivity implements
 		}
 	}
 
-
-
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		// TODO Auto-generated method stub
-		 Log.e("surfaceChanged", "surfaceChanged => w=" + width + ", h=" + height);
+		Log.e("surfaceChanged", "surfaceChanged => w=" + width + ", h="
+				+ height);
 		if (previewing) {
 			camera.stopPreview();
 			previewing = false;

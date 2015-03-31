@@ -147,7 +147,7 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 									text.setText(obj.getFields()[i].getKind()
 											.getName());
 									text.setTextSize(8.0f);
-									text.setBackgroundColor(Color.BLUE);
+									//text.setBackgroundColor(Color.BLUE);
 									FrameLayout.LayoutParams lpTxt = new FrameLayout.LayoutParams(
 											(int) (obj.getFields()[i]
 													.getScreenPos().getWidth() * widthRatio),
@@ -159,6 +159,20 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 											- ((int) (obj.getFields()[i]
 													.getScreenPos().getHeight() * heightRatio));
 									lpTxt.leftMargin = (int) (obj.getFields()[i]
+											.getScreenPos().getLeft() * widthRatio)
+											+ ((layout.getMeasuredWidth() - documentPic
+													.getMeasuredWidth()) / 2);
+									FrameLayout.LayoutParams lpImg = new FrameLayout.LayoutParams(
+											(int) (obj.getFields()[i]
+													.getScreenPos().getWidth() * widthRatio),
+											(int) (obj.getFields()[i]
+													.getScreenPos().getHeight() * heightRatio),
+											Gravity.TOP | Gravity.LEFT);
+									lpImg.topMargin = (int) (obj.getFields()[i]
+											.getScreenPos().getTop() * heightRatio)
+											- 2*((int) (obj.getFields()[i]
+													.getScreenPos().getHeight() * heightRatio));
+									lpImg.leftMargin = (int) (obj.getFields()[i]
 											.getScreenPos().getLeft() * widthRatio)
 											+ ((layout.getMeasuredWidth() - documentPic
 													.getMeasuredWidth()) / 2);
@@ -233,7 +247,8 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 									// .getTop() - 80;
 									layout.addView(text, lpTxt);
 
-									layout.addView(filedImage, lpTxt);
+									layout.addView(filedImage, lpImg);
+
 									// }
 								}
 							}

@@ -472,7 +472,7 @@ public class DocumentViewer extends ViditureNetworkActivity {
 				} else {
 
 					startActivity(new Intent(DocumentViewer.this,
-							TestCamera.class));
+							DocumentName.class));
 				}
 			}
 		});

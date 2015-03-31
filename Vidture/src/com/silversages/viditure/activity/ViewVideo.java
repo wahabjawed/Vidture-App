@@ -40,7 +40,8 @@ public class ViewVideo extends ViditureActivity {
 
 		String state = Environment.getExternalStorageState();
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
-			video.setVideoPath(Environment.getExternalStorageDirectory().getAbsolutePath()+"/myvideo.mp4");
+			video.setVideoPath(Environment.getExternalStorageDirectory()
+					.getAbsolutePath() + "/myvideo.mp4");
 		} else {
 			video.setVideoPath(getFilesDir().getAbsolutePath() + "/video.mp4");
 		}
@@ -62,6 +63,7 @@ public class ViewVideo extends ViditureActivity {
 				// TODO Auto-generated method stub
 
 				ViewVideo.this.finish();
+				startActivity(new Intent(ViewVideo.this, ReadSentence.class));
 			}
 		});
 
@@ -71,7 +73,10 @@ public class ViewVideo extends ViditureActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				startActivity(new Intent(ViewVideo.this, DocumentName.class));
+				// startActivity(new Intent(ViewVideo.this,
+				// DocumentName.class));
+				ViewVideo.this.finish();
+
 			}
 		});
 
