@@ -1,4 +1,4 @@
-package com.silversages.viditure.activity;
+package com.silversages.viditure.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,13 +18,14 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
-import com.silversages.viditure.objects.ObjectHolder;
+import com.silversages.viditure.model.ObjectHolder;
 import com.silversages.viditure.util.CameraUtil;
 
 @SuppressLint("SdCardPath")
@@ -41,6 +42,8 @@ public class ReadSentence extends ViditureActivity implements
 	MediaRecorder mediaRecorder = new MediaRecorder();
 	boolean recording = false;
 	TextView message;
+	Camera c = null;
+	Camera.Parameters params;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,33 +92,15 @@ public class ReadSentence extends ViditureActivity implements
 
 	private Camera getCameraInstance() {
 		// TODO Auto-generated method stub
-		Camera c = null;
+
 		try {
 			c = Camera.open(Zainu.getCameraUtil().getFrontCameraId());
 			c.setDisplayOrientation(90);
 			Camera.CameraInfo info = new Camera.CameraInfo();
 			Camera.getCameraInfo(Zainu.getCameraUtil().getFrontCameraId(), info);
 
-			Camera.Parameters params = c.getParameters();
+			params = c.getParameters();
 			params.setRotation(90);
-
-			int SurfaceViewWidth = surafceView.getWidth();
-			int SurfaceViewHeight = surafceView.getHeight();
-
-			Log.e("SurfaceViewWidth", SurfaceViewWidth + "");
-			Log.e("SurfaceViewHeight", SurfaceViewHeight + "");
-
-			List<Size> sizes = c.getParameters().getSupportedPreviewSizes();
-			Camera.Size optimalSize = CameraUtil.getOptimalPreviewSize(sizes,
-					SurfaceViewWidth, SurfaceViewHeight);
-
-			Log.e("optimalSizeHeight", optimalSize.height + "");
-			Log.e("optimalSizeWidth", optimalSize.width + "");
-
-			// set parameters
-			params.setPreviewSize(optimalSize.width, optimalSize.height);
-
-			c.setParameters(params);
 
 		} catch (Exception e) {
 
@@ -280,6 +265,30 @@ public class ReadSentence extends ViditureActivity implements
 		try {
 			myCamera.setPreviewDisplay(surfaceHolder);
 			myCamera.startPreview();
+
+			Log.e("surfaceChanged", "surfaceChanged => w=" + width + ", h="
+					+ height);
+
+			List<Size> sizes = c.getParameters().getSupportedPreviewSizes();
+			Camera.Size optimalSize = CameraUtil.getOptimalPreviewSize(sizes,
+					width, height);
+
+			Log.e("optimalSizeHeight", optimalSize.height + "");
+			Log.e("optimalSizeWidth", optimalSize.width + "");
+			// set parameters
+			params.setPreviewSize(optimalSize.width, optimalSize.height);
+
+			c.setParameters(params);
+
+			double ratio = (double) optimalSize.width
+					/ (double) optimalSize.height;
+			Log.e("Ratio", ratio + "");
+			double Dheight = height;
+
+			int newWidth = (int) (Dheight / ratio);
+			Log.e("New Width", newWidth + "");
+
+			surafceView.getLayoutParams().width = newWidth;
 
 		} catch (Exception e) {
 			Log.d("Vidture", e.getMessage());

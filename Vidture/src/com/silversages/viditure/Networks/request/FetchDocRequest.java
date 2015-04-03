@@ -12,9 +12,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.silversages.viditure.abstracts.AbstractRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
-import com.silversages.viditure.objects.AuthXObject;
-import com.silversages.viditure.objects.ObjectHolder;
-import com.silversages.viditure.objects.fetchDocument.FetchDocObject;
+import com.silversages.viditure.model.AuthXObject;
+import com.silversages.viditure.model.ObjectHolder;
+import com.silversages.viditure.model.fetchDocument.FetchDocObject;
 import com.silversages.viditure.util.JSONParser;
 
 public class FetchDocRequest extends AbstractRequest implements IRequestHandler {

@@ -1,4 +1,4 @@
-package com.silversages.viditure.activity;
+package com.silversages.viditure.controller;
 
 import java.io.File;
 
@@ -15,8 +15,8 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureActivity;
-import com.silversages.viditure.objects.ObjectHolder;
-import com.silversages.viditure.objects.sendSignerData.SignerObject;
+import com.silversages.viditure.model.ObjectHolder;
+import com.silversages.viditure.model.sendSignerData.SignerObject;
 
 public class DocumentName extends ViditureActivity {
 

@@ -1,6 +1,7 @@
-package com.silversages.viditure.activity;
+package com.silversages.viditure.controller;
 
 import java.io.File;
+import java.util.Calendar;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -21,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,8 +34,8 @@ import com.silversages.viditure.R;
 import com.silversages.viditure.Networks.request.FetchDocRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
 import com.silversages.viditure.adapter.DocumentAdapter;
-import com.silversages.viditure.objects.ObjectHolder;
-import com.silversages.viditure.objects.fetchDocument.Pages;
+import com.silversages.viditure.model.ObjectHolder;
+import com.silversages.viditure.model.fetchDocument.Pages;
 import com.silversages.viditure.util.Signature;
 
 public class DocumentViewer extends ViditureNetworkActivity {
@@ -79,9 +81,12 @@ public class DocumentViewer extends ViditureNetworkActivity {
 	// dialog dummy
 	Dialog dialog_dummy;
 	EditText dummy_fullname;
-	EditText dummy_date;
+	DatePicker dummy_date;
 	EditText dummy_initials;
 	Button dummy_viditure;
+	int year;
+	int month;
+	int day;
 
 	// dialog name confirm
 	Dialog dialog_name_confirm;
@@ -434,6 +439,8 @@ public class DocumentViewer extends ViditureNetworkActivity {
 				// TODO Auto-generated method stub
 				showToast(data, Toast.LENGTH_SHORT);
 				DocumentAdapter.stateTextView.setText(data + "");
+				DocumentAdapter.stateImageView.setVisibility(View.INVISIBLE);
+				adapter.setData(DocumentAdapter.key, true, data);
 				dialog_name_confirm.dismiss();
 			}
 		});
@@ -441,19 +448,36 @@ public class DocumentViewer extends ViditureNetworkActivity {
 		dummy_viditure = (Button) dialog_dummy.findViewById(R.id.viditure);
 		dummy_fullname = (EditText) dialog_dummy.findViewById(R.id.full_name);
 		dummy_initials = (EditText) dialog_dummy.findViewById(R.id.initials);
-		dummy_date = (EditText) dialog_dummy.findViewById(R.id.date);
+		dummy_date = (DatePicker) dialog_dummy.findViewById(R.id.date);
+		final Calendar calendar = Calendar.getInstance();
+
+		year = calendar.get(Calendar.YEAR);
+		month = calendar.get(Calendar.MONTH);
+		day = calendar.get(Calendar.DAY_OF_MONTH);
+
+		// set current date into textview
+		// text_date.setText(new StringBuilder()
+		// // Month is 0 based, so you have to add 1
+		// .append(month + 1).append("-")
+		// .append(day).append("-")
+		// .append(year).append(" "));
+
+		// set current date into Date Picker
+		dummy_date.init(year, month, day, null);
 		dummy_viditure.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (dummy_fullname.getText().length() > 1
-						&& dummy_initials.getText().length() > 1
-						&& dummy_date.getText().length() > 1) {
+						&& dummy_initials.getText().length() > 1) {
 
 					name = dummy_fullname.getText().toString();
 					initials = dummy_initials.getText().toString();
-					d_date = dummy_date.getText().toString();
+					d_date = (dummy_date.getMonth() + 1) + "-"
+							+ dummy_date.getDayOfMonth() + "-"
+							+ dummy_date.getYear();
+
 					dialog_dummy.dismiss();
 					dummyFieldFilled = 1;
 				} else {

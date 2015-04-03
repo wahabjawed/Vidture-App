@@ -32,7 +32,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name=".activity.TestCamera" >
+        <activity android:name="com.silversages.viditure.controller.TestCamera" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.DocumentViewer"
+            android:name="com.silversages.viditure.controller.DocumentViewer"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -53,12 +53,12 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ReadSentence" >
+        <activity android:name="com.silversages.viditure.controller.ReadSentence" >
         </activity>
-        <activity android:name=".activity.ViewVideo" >
+        <activity android:name="com.silversages.viditure.controller.ViewVideo" >
         </activity>
         <activity
-            android:name=".activity.DocumentName"
+            android:name="com.silversages.viditure.controller.DocumentName"
             android:screenOrientation="portrait" >
         </activity>
     </application>

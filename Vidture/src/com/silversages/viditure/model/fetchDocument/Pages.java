@@ -1,4 +1,4 @@
-package com.silversages.viditure.objects.fetchDocument;
+package com.silversages.viditure.model.fetchDocument;
 
 public class Pages {
 

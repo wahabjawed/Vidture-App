@@ -1,4 +1,4 @@
-package com.silversages.viditure.activity;
+package com.silversages.viditure.controller;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.silversages.viditure.R;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
 import com.silversages.viditure.adapter.DashboardAdapter;
-import com.silversages.viditure.objects.DashboardObject;
+import com.silversages.viditure.model.DashboardObject;
 import com.silversages.viditure.util.SQLHelper;
 
 public class Dashboard extends ViditureNetworkActivity {

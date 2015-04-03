@@ -1,10 +1,10 @@
-package com.silversages.viditure.objects;
+package com.silversages.viditure.model;
 
 import android.util.Log;
 
-import com.silversages.viditure.objects.dialog.*;
-import com.silversages.viditure.objects.fetchDocument.FetchDocObject;
-import com.silversages.viditure.objects.sendSignerData.SignerObject;
+import com.silversages.viditure.model.dialog.*;
+import com.silversages.viditure.model.fetchDocument.FetchDocObject;
+import com.silversages.viditure.model.sendSignerData.SignerObject;
 
 public class ObjectHolder {
 
@@ -63,16 +63,5 @@ public class ObjectHolder {
 		ObjectHolder.docObj = docObj;
 	}
 
-	public static DocumentObject[] getDocumentImageObject() {
-
-		DocumentObject[] docObj = new DocumentObject[getDocObj().getPages().length];
-
-		for (int i = 0; i < docObj.length; i++) {
-
-			Log.d("page1", getDocObj().getPages()[i].getPageImage_url());
-			docObj[i] = new DocumentObject();
-			docObj[i].setImgURL(getDocObj().getPages()[i].getPageImage_url());
-		}
-		return docObj;
-	}
+	
 }

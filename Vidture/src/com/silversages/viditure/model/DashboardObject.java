@@ -1,4 +1,4 @@
-package com.silversages.viditure.objects;
+package com.silversages.viditure.model;
 
 public class DashboardObject {
 	private String Name;

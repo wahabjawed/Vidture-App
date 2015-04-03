@@ -1,4 +1,4 @@
-package com.silversages.viditure.objects.sendSignerData;
+package com.silversages.viditure.model.sendSignerData;
 
 public class FieldInputs {
 

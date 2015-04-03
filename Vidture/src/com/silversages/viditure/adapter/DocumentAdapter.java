@@ -1,8 +1,9 @@
 package com.silversages.viditure.adapter;
 
+import java.util.Hashtable;
+
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,45 +15,54 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.silversages.viditure.R;
 import com.silversages.viditure.ViditureApp;
-import com.silversages.viditure.activity.DocumentViewer;
-import com.silversages.viditure.objects.ObjectHolder;
-import com.silversages.viditure.objects.fetchDocument.Pages;
+import com.silversages.viditure.controller.DocumentViewer;
+import com.silversages.viditure.model.ObjectHolder;
+import com.silversages.viditure.model.PageData;
+import com.silversages.viditure.model.fetchDocument.Pages;
 import com.silversages.viditure.util.TouchImageView;
 
 public class DocumentAdapter extends ArrayAdapter<Pages> {
 
 	private DocumentViewer activity;
 	private Pages[] data;
+	private Hashtable<String, PageData> persistData = new Hashtable<String, PageData>();
 	Pages obj = null;
 	public static TextView stateTextView;
+	public static ImageView stateImageView;
+	public static String key = "";
 	public int counts;
-
-	class pageData {
-
-		int pageNo;
-		int fieldno;
-		int y;
-		boolean isDone = false;
-		String data;
-
-	}
 
 	public DocumentAdapter(Activity context, Pages[] _data) {
 		super(context, R.layout.row_document, _data);
 		this.activity = (DocumentViewer) context;
 		this.data = _data;
 		counts = data.length;
+
+		setupPersistantList();
+
+	}
+
+	private void setupPersistantList() {
+		for (int i = 0; i < data.length; i++) {
+			for (int j = 0; j < data[i].getFields().length; j++) {
+
+				persistData.put(i + "." + j,
+						new PageData(false, "", data[i].getFields()[j]
+								.getKind().getType(), i, j));
+			}
+		}
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
+
+		final int _position = position;
 		View vi = convertView;
 		obj = data[position];
 		if (vi == null) {
@@ -66,6 +76,8 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 		final TouchImageView documentPic = (TouchImageView) vi
 				.findViewById(R.id.docImg);
 		final FrameLayout layout = (FrameLayout) vi.findViewById(R.id.docLay);
+		final FrameLayout layoutView = (FrameLayout) vi
+				.findViewById(R.id.docLayView);
 
 		if (obj.getPageImage_url() != null) {
 			Log.e("Vid", obj.getPageImage_url());
@@ -120,6 +132,9 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 
 							if (obj.getFields() != null
 									&& obj.getFields().length > 0) {
+
+								layoutView.removeAllViews();
+
 								for (int i = 0; i < obj.getFields().length; i++) {
 									final int count = i;
 									Log.e("Viditure",
@@ -147,7 +162,19 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 									text.setText(obj.getFields()[i].getKind()
 											.getName());
 									text.setTextSize(8.0f);
-									//text.setBackgroundColor(Color.BLUE);
+									// text.setBackgroundColor(Color.BLUE);
+
+									PageData objPage = persistData
+											.get(_position + "." + count);
+
+									text.setText(objPage.getData());
+									if (objPage.isFilled()) {
+
+										filedImage
+												.setVisibility(View.INVISIBLE);
+										text.setEnabled(false);
+									}
+
 									FrameLayout.LayoutParams lpTxt = new FrameLayout.LayoutParams(
 											(int) (obj.getFields()[i]
 													.getScreenPos().getWidth() * widthRatio),
@@ -170,7 +197,8 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 											Gravity.TOP | Gravity.LEFT);
 									lpImg.topMargin = (int) (obj.getFields()[i]
 											.getScreenPos().getTop() * heightRatio)
-											- 2*((int) (obj.getFields()[i]
+											- 2
+											* ((int) (obj.getFields()[i]
 													.getScreenPos().getHeight() * heightRatio));
 									lpImg.leftMargin = (int) (obj.getFields()[i]
 											.getScreenPos().getLeft() * widthRatio)
@@ -217,6 +245,7 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 															.getName()
 															.equals("date")) {
 												stateTextView = text;
+												stateImageView = filedImage;
 												DocumentAdapter.this.activity.openDialogName(obj
 														.getFields()[count]
 														.getKind().getName());
@@ -239,15 +268,10 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 											// Toast.LENGTH_LONG).show();
 										}
 									});
-									// lp.horizontalMargin =
-									// obj.getFields()[i].getScreenPos()
-									// .getLeft() - 45;
-									// lp.verticalMargin =
-									// obj.getFields()[i].getScreenPos()
-									// .getTop() - 80;
-									layout.addView(text, lpTxt);
 
-									layout.addView(filedImage, lpImg);
+									layoutView.addView(text, lpTxt);
+
+									layoutView.addView(filedImage, lpImg);
 
 									// }
 								}
@@ -279,12 +303,6 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 	}
 
 	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return data.length;
-	}
-
-	@Override
 	public int getViewTypeCount() {
 
 		return getCount();
@@ -292,8 +310,28 @@ public class DocumentAdapter extends ArrayAdapter<Pages> {
 
 	@Override
 	public int getItemViewType(int position) {
+		return getItem(position).getPageNumber();
+	}
 
+	@Override
+	public int getCount() {
+		return data.length;
+	}
+
+	@Override
+	public Pages getItem(int position) {
+		return data[position];
+	}
+
+	@Override
+	public long getItemId(int position) {
 		return position;
 	}
 
+	public void setData(String key, boolean isFilled, String data) {
+
+		persistData.get(key).setFilled(isFilled);
+		persistData.get(key).setData(data);
+
+	}
 }

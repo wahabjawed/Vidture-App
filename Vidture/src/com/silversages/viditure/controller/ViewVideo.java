@@ -1,4 +1,4 @@
-package com.silversages.viditure.activity;
+package com.silversages.viditure.controller;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.silversages.viditure.activity;
+package com.silversages.viditure.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +32,8 @@ public class TestCamera extends ViditureActivity implements
 	Camera camera;
 	boolean previewing = false;
 	int cameraIndex;
+	Camera c = null;
+	Camera.Parameters params;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +76,7 @@ public class TestCamera extends ViditureActivity implements
 
 	private Camera getCameraInstance() {
 		// TODO Auto-generated method stub
-		Camera c = null;
+
 		try {
 			int cameraID = Zainu.getCameraUtil().getFrontCameraId();
 			if (cameraID == -1) {
@@ -90,26 +92,9 @@ public class TestCamera extends ViditureActivity implements
 				Camera.getCameraInfo(Zainu.getCameraUtil().getFrontCameraId(),
 						info);
 
-				Camera.Parameters params = c.getParameters();
+				params = c.getParameters();
 				params.setRotation(90);
 
-				int SurfaceViewWidth = surafceView.getWidth();
-				int SurfaceViewHeight = surafceView.getHeight();
-
-				Log.e("SurfaceViewWidth", SurfaceViewWidth + "");
-				Log.e("SurfaceViewHeight", SurfaceViewHeight + "");
-
-				List<Size> sizes = c.getParameters().getSupportedPreviewSizes();
-				Camera.Size optimalSize = CameraUtil.getOptimalPreviewSize(
-						sizes, SurfaceViewWidth, SurfaceViewHeight);
-
-				Log.e("optimalSizeHeight", optimalSize.height + "");
-				Log.e("optimalSizeWidth", optimalSize.width + "");
-
-				// set parameters
-				params.setPreviewSize(optimalSize.width, optimalSize.height);
-
-				c.setParameters(params);
 			}
 		} catch (Exception e) {
 
@@ -169,8 +154,7 @@ public class TestCamera extends ViditureActivity implements
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
 			int height) {
 		// TODO Auto-generated method stub
-		Log.e("surfaceChanged", "surfaceChanged => w=" + width + ", h="
-				+ height);
+
 		if (previewing) {
 			camera.stopPreview();
 			previewing = false;
@@ -181,6 +165,31 @@ public class TestCamera extends ViditureActivity implements
 			camera.setPreviewDisplay(surfaceHolder);
 			camera.startPreview();
 			previewing = true;
+
+			Log.e("surfaceChanged", "surfaceChanged => w=" + width + ", h="
+					+ height);
+
+			List<Size> sizes = c.getParameters().getSupportedPreviewSizes();
+			Camera.Size optimalSize = CameraUtil.getOptimalPreviewSize(sizes,
+					width, height);
+
+			Log.e("optimalSizeHeight", optimalSize.height + "");
+			Log.e("optimalSizeWidth", optimalSize.width + "");
+			// set parameters
+			params.setPreviewSize(optimalSize.width, optimalSize.height);
+
+			c.setParameters(params);
+
+			double ratio = (double) optimalSize.width
+					/ (double) optimalSize.height;
+			Log.e("Ratio", ratio + "");
+			double Dheight = height;
+
+			int newWidth = (int) (Dheight / ratio);
+			Log.e("New Width", newWidth + "");
+
+			surafceView.getLayoutParams().width = newWidth;
+
 		} catch (IOException e) {
 			Log.e("Viditure", e.getMessage());
 		}

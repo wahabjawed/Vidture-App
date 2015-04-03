@@ -1,4 +1,4 @@
-package com.silversages.viditure.activity;
+package com.silversages.viditure.controller;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,50 +11,49 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.silversages.viditure.R;
-import com.silversages.viditure.Networks.request.RegisterRequest;
+import com.silversages.viditure.Networks.request.LoginRequest;
 import com.silversages.viditure.abstracts.ViditureNetworkActivity;
 
-public class Register extends ViditureNetworkActivity {
+public class Login extends ViditureNetworkActivity {
 
 	EditText email;
-	EditText name;
 	EditText password;
-	Button cancel;
+	Button login;
 	Button register;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.register);
+		setContentView(R.layout.login);
 		setupView();
 		setupListner();
+
 	}
 
 	@Override
 	public void setupView() {
 		// TODO Auto-generated method stub
 
-		name = (EditText) findViewById(R.id.name);
 		email = (EditText) findViewById(R.id.email);
 		password = (EditText) findViewById(R.id.password);
-		cancel = (Button) findViewById(R.id.cancel);
-		register = (Button) findViewById(R.id.create);
+		login = (Button) findViewById(R.id.login);
+		register = (Button) findViewById(R.id.register);
+
 	}
 
 	@Override
 	public void setupListner() {
 		// TODO Auto-generated method stub
-
-		cancel.setOnClickListener(new OnClickListener() {
+		register.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Register.this.finish();
+				startActivity(new Intent(Login.this, Register.class));
+
 			}
 		});
 
-		register.setOnClickListener(new OnClickListener() {
+		login.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -62,18 +61,16 @@ public class Register extends ViditureNetworkActivity {
 
 				if (Zainu.getNetworkManager().IsConnected()) {
 
-					new RegisterRequest(name.getText().toString(), email
-							.getText().toString(), password.getText()
-							.toString()).PerformTask(Register.this);
-
+					new LoginRequest(email.getText().toString(), password
+							.getText().toString()).PerformTask(Login.this);
 				} else {
 
 					showToast("Couldn't connect to internet", Toast.LENGTH_LONG);
 
 				}
-
 			}
 		});
+
 	}
 
 	@Override
@@ -84,8 +81,9 @@ public class Register extends ViditureNetworkActivity {
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putBoolean("first_time", true);
 		editor.commit();
-		startActivity(new Intent(Register.this, Dashboard.class));
+		startActivity(new Intent(Login.this, Dashboard.class));
 		this.finish();
+
 	}
 
 	@Override

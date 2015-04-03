@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.silversages.viditure.R;
-import com.silversages.viditure.objects.DashboardObject;
+import com.silversages.viditure.model.DashboardObject;
 
 public class DashboardAdapter extends ArrayAdapter<DashboardObject> {
 

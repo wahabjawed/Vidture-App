@@ -10,7 +10,7 @@ import android.support.v4.app.TaskStackBuilder;
 
 import com.silversages.viditure.R;
 import com.silversages.viditure.ViditureApp;
-import com.silversages.viditure.activity.Dashboard;
+import com.silversages.viditure.controller.Dashboard;
 
 public class Notification {
 
